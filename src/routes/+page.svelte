@@ -16,7 +16,7 @@
 		<hr class="h-1 bg-[#7e7295]" />
 
 		<!-- HOW TO GET THE AREA???????? -->
-		<div class="h-[680px] w-[1920px] bg-green-500"></div>
+		<div class="h-[720px] w-[1920px] bg-green-500"></div>
 		<DifferenceBar red_score={red_team_score} blue_score={blue_team_score} />
 		<div class="mx-12 flex justify-between">
 			<p class="text-7xl font-bold text-red-400">{red_team_score}</p>
