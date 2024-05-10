@@ -8,7 +8,25 @@
 	let red_team_score = 50;
 	let blue_team_score = 50;
 
-	let is_playing = false;
+	let is_playing = false;	// Listen for messages
+	const SOCKET = new WebSocket('ws://127.0.0.1:24050/ws');
+	SOCKET.addEventListener('message', (event) => {
+		red_team_score = 0;
+		blue_team_score = 0 ;
+		let tourney_data = JSON.parse(event.data)['tourney']['ipcClients'];
+
+		tourney_data.forEach((data) => {
+			switch(data.team) {
+					case "left":
+					red_team_score += data.gameplay.score;
+					break;
+					case "right":
+					blue_team_score += data.gameplay.score;
+					break;
+			}
+		});
+		console.log(tourney_data);
+	});
 </script>
 
 <div class="flex h-screen w-screen flex-col justify-between">
