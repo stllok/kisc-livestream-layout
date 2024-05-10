@@ -1,6 +1,5 @@
 <script lang="ts">
-	import Page from './+page.svelte';
-
+	export let img_path: string;
 	export let title: string;
 	export let artist: string;
 	export let mapper: string;
@@ -12,24 +11,28 @@
 	export let bpm: number;
 	export let star_rating: number;
 
-	const THIRD_LINE = [
-		['SR', `${star_rating}*`],
-		['Length', `${Math.floor(length / 60)}:${length % 60}`],
-		['', `[${diff_name}]`]
+	let THIRD_LINE = [
+		...[
+			['SR', `${star_rating}*`],
+			['Length', `${Math.floor(length / 1000 / 60)}:${Math.floor((length / 1000) % 60)}`],
+			['', `[${diff_name}]`]
+		]
 	];
 
-	const FOURTH_LINE = [
-		['CS', `${cs.toFixed(1)}`],
-		['AR', `${ar.toFixed(1)}`],
-		['OD', `${od.toFixed(1)}`],
-		['BPM', `${bpm}`]
+	let FOURTH_LINE = [
+		...[
+			['CS', `${cs}`],
+			['AR', `${ar}`],
+			['OD', `${od}`],
+			['BPM', `${bpm}`]
+		]
 	];
 </script>
 
 <div class="flex h-36 gap-2 *:text-[#7e7295]">
-	<img class="h-36 w-auto rounded-2xl border-2 border-[#7e22ce]" src="/SAMPLE/bg.jpg" alt="BG" />
+	<img class="h-36 w-auto rounded-2xl border-2 border-[#7e22ce]" src={img_path} alt="BG" />
 	<div class="flex w-96 flex-col justify-around">
-		<p class="text-4xl font-extrabold">{title}</p>
+		<p class="overflow-visible text-4xl font-extrabold">{title}</p>
 		<div class="flex justify-between *:text-2xl *:font-bold">
 			<p>{artist}</p>
 			<p>{mapper}</p>
