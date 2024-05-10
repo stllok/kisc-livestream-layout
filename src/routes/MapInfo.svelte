@@ -26,8 +26,8 @@
 	];
 </script>
 
-<div class="flex gap-2 *:text-[#7e7295]">
-	<img class="h-32 w-auto rounded-2xl border-2 border-[#7e22ce]" src="/SAMPLE/bg.jpg" alt="BG" />
+<div class="flex h-36 gap-2 *:text-[#7e7295]">
+	<img class="h-36 w-auto rounded-2xl border-2 border-[#7e22ce]" src="/SAMPLE/bg.jpg" alt="BG" />
 	<div class="flex w-96 flex-col justify-around">
 		<p class="text-4xl font-extrabold">{title}</p>
 		<div class="flex justify-between *:text-2xl *:font-bold">
