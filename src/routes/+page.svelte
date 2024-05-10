@@ -44,7 +44,7 @@
 		let tourney_data = raw_data['tourney']['ipcClients'];
 
 		let tourney_state = raw_data['tourney']['manager']['ipcState'];
-		chats = raw_data['tourney']['manager']['chat'];
+		chats = raw_data['tourney']['manager']['chat'] ?? [];
 
 		best_of = manager_data['bestOF'];
 		red_point = manager_data['stars']['left'];

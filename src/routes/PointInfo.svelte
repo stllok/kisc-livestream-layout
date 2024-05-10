@@ -15,9 +15,9 @@
 				<!-- <img src={i < current_point ? '/point.avif' : '/not-point.avif'} alt="POINT" /> -->
 				{#key i}
 					{#if i < current_point}
-						<img src="/point.avif" alt="POINT" in:fade />
+						<img src="./point.avif" alt="POINT" in:fade />
 					{:else}
-						<img src="/not-point.avif" alt="NOT_POINT" in:fade />
+						<img src="./not-point.avif" alt="NOT_POINT" in:fade />
 					{/if}
 				{/key}
 			{/each}
