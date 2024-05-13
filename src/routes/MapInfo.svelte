@@ -11,21 +11,17 @@
 	export let bpm: number;
 	export let star_rating: number;
 
-	let THIRD_LINE = [
-		...[
-			['SR', `${star_rating}*`],
-			['Length', `${Math.floor(length / 1000 / 60)}:${Math.floor((length / 1000) % 60)}`],
-			['', `[${diff_name}]`]
-		]
+	$: THIRD_LINE = [
+		['SR', `${star_rating}*`],
+		['Length', `${Math.floor(length / 1000 / 60)}:${Math.floor((length / 1000) % 60)}`],
+		['', `[${diff_name}]`]
 	];
 
-	let FOURTH_LINE = [
-		...[
-			['CS', `${cs}`],
-			['AR', `${ar}`],
-			['OD', `${od}`],
-			['BPM', `${bpm}`]
-		]
+	$: FOURTH_LINE = [
+		['CS', `${cs}`],
+		['AR', `${ar}`],
+		['OD', `${od}`],
+		['BPM', `${bpm}`]
 	];
 </script>
 
