@@ -2,7 +2,28 @@
 export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
-		extend: {}
-	},
-	plugins: []
+		extend: {
+			colors: {
+				NM: {
+					DEFAULT: '#529578'
+				},
+				HD: {
+					DEFAULT: '#ch9474'
+				},
+				HR: {
+					DEFAULT: '#c85762'
+				},
+				DT: {
+					DEFAULT: '#88697b'
+				},
+				FM: {
+					DEFAULT: '#7494a4'
+				},
+				TB: {
+					DEFAULT: '#5a5a5b'
+				}
+			}
+		},
+		plugins: []
+	}
 };
