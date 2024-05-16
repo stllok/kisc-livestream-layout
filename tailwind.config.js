@@ -8,7 +8,7 @@ export default {
 					DEFAULT: '#529578'
 				},
 				HD: {
-					DEFAULT: '#ch9474'
+					DEFAULT: '#cb9474'
 				},
 				HR: {
 					DEFAULT: '#c85762'
@@ -25,5 +25,6 @@ export default {
 			}
 		},
 		plugins: []
-	}
+	},
+	safelist: ['bg-NM', 'bg-HD', 'bg-HR', 'bg-DT', 'bg-FM', 'bg-TB']
 };

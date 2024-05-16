@@ -1,0 +1,114 @@
+{
+	"NM": [
+		{
+			"artist": "ARTIST",
+			"title": "TITLE",
+			"difficulty": "DIFFICULTY"
+		},
+		{
+			"artist": "ARTIST",
+			"title": "TITLE",
+			"difficulty": "DIFFICULTY"
+		},
+		{
+			"artist": "ARTIST",
+			"title": "TITLE",
+			"difficulty": "DIFFICULTY"
+		},
+		{
+			"artist": "ARTIST",
+			"title": "TITLE",
+			"difficulty": "DIFFICULTY"
+		},
+		{
+			"artist": "ARTIST",
+			"title": "TITLE",
+			"difficulty": "DIFFICULTY"
+		},
+		{
+			"artist": "ARTIST",
+			"title": "TITLE",
+			"difficulty": "DIFFICULTY"
+		}
+	],
+	"HD": [
+		{
+			"artist": "ARTIST",
+			"title": "TITLE",
+			"difficulty": "DIFFICULTY"
+		},
+		{
+			"artist": "ARTIST",
+			"title": "TITLE",
+			"difficulty": "DIFFICULTY"
+		},
+		{
+			"artist": "ARTIST",
+			"title": "TITLE",
+			"difficulty": "DIFFICULTY"
+		}
+	],
+	"HR": [
+		{
+			"artist": "ARTIST",
+			"title": "TITLE",
+			"difficulty": "DIFFICULTY"
+		},
+		{
+			"artist": "ARTIST",
+			"title": "TITLE",
+			"difficulty": "DIFFICULTY"
+		},
+		{
+			"artist": "ARTIST",
+			"title": "TITLE",
+			"difficulty": "DIFFICULTY"
+		}
+	],
+	"DT": [
+		{
+			"artist": "ARTIST",
+			"title": "TITLE",
+			"difficulty": "DIFFICULTY"
+		},
+		{
+			"artist": "ARTIST",
+			"title": "TITLE",
+			"difficulty": "DIFFICULTY"
+		},
+		{
+			"artist": "ARTIST",
+			"title": "TITLE",
+			"difficulty": "DIFFICULTY"
+		},
+		{
+			"artist": "ARTIST",
+			"title": "TITLE",
+			"difficulty": "DIFFICULTY"
+		}
+	],
+	"FM": [
+		{
+			"artist": "ARTIST",
+			"title": "TITLE",
+			"difficulty": "DIFFICULTY"
+		},
+		{
+			"artist": "ARTIST",
+			"title": "TITLE",
+			"difficulty": "DIFFICULTY"
+		},
+		{
+			"artist": "ARTIST",
+			"title": "TITLE",
+			"difficulty": "DIFFICULTY"
+		}
+	],
+	"TB": [
+		{
+			"artist": "ARTIST",
+			"title": "TITLE",
+			"difficulty": "DIFFICULTY"
+		}
+	]
+}
