@@ -21,6 +21,12 @@ export default {
 				},
 				TB: {
 					DEFAULT: '#5a5a5b'
+				},
+				TEAMBLUE: {
+					DEFAULT: '#3B82F6'
+				},
+				TEAMRED: {
+					DEFAULT: '#F87171'
 				}
 			}
 		},

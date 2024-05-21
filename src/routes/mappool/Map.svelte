@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 
+	// team data
+	export const team_red: string = 'UNNAMED RED';
+	export const team_blue: string = 'UNNAMED BLUE';
+
+	// map metadata
 	export let mod: string;
 	export let idx: number;
 	export let artist: string;
@@ -13,7 +18,7 @@
 
 	let RESULT: [boolean, boolean] | null = null;
 	function on_set() {
-		RESULT = [is_ban, is_team_red];
+		RESULT = RESULT === null ? [is_ban, is_team_red] : RESULT;
 	}
 
 	function on_unset() {
@@ -22,25 +27,25 @@
 </script>
 
 <button
-	class="m-2 h-16 w-[38rem] rounded-2xl *:rounded-2xl *:duration-200"
-	style:box-shadow={'4px 4px 21px rgba(0,0,0,0.58)'}
+	class="relative m-2 h-16 w-[42rem] rounded-2xl *:rounded-2xl *:duration-200"
 	on:click={on_set}
 	on:contextmenu|preventDefault={on_unset}
 >
 	{#if RESULT !== null}
-		<div
-			class="absolute top-3 z-30 h-full w-full text-4xl font-semibold"
+		<p
+			class="absolute z-30 flex h-full w-11/12 items-center justify-center text-4xl font-semibold"
 			class:team_red={RESULT[1]}
 			class:team_blue={!RESULT[1]}
 			transition:fade
 		>
-			Team {RESULT[1] ? 'Red' : 'Blue'} Banned
-		</div>
-		<div transition:fade class="absolute z-20 h-full w-full bg-black opacity-65"></div>
+			{RESULT[1] ? team_red : team_blue} Banned
+		</p>
+		<div transition:fade class="absolute z-20 h-full w-11/12 bg-black opacity-65"></div>
 	{/if}
 	<div
 		style:background-image={`url("/SAMPLE/bg.jpg")`}
-		class="-z-10 h-full w-full bg-cover bg-local bg-center bg-origin-padding"
+		style:box-shadow={'4px 4px 21px rgba(0,0,0,0.58)'}
+		class="-z-10 h-full w-11/12 bg-cover bg-local bg-center bg-origin-padding"
 	/>
 	<div class="relative -top-14 flex items-center justify-between">
 		<p
@@ -52,7 +57,7 @@
 
 		<p
 			style:box-shadow={'4px 4px 21px rgba(0,0,0,0.68)'}
-			class="z-30 -mr-14 w-24 rounded-xl bg-{mod} p-1 text-4xl font-bold text-white shadow-xl"
+			class="z-30 w-24 rounded-xl bg-{mod} p-1 text-4xl font-bold text-white shadow-xl"
 		>
 			{mod}{mod != 'TB' ? idx : ''}
 		</p>
