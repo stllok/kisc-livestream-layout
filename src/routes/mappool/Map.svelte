@@ -49,7 +49,7 @@
 	/>
 	<div class="relative -top-14 flex items-center justify-between">
 		<p
-			class="drop-shadow-2x loverflow-hidden ml-5 text-nowrap text-3xl font-semibold text-white"
+			class="drop-shadow-2x loverflow-hidden font-sourcehansan ml-5 text-nowrap text-3xl font-semibold text-white"
 			style:text-shadow={'4px 4px 8px black'}
 		>
 			{artist} - {title} [{difficulty}]

@@ -3,6 +3,9 @@ export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
 		extend: {
+			fontFamily: {
+				sourcehansan: ['SourceHanSans-VF', 'sans']
+			},
 			colors: {
 				NM: {
 					DEFAULT: '#529578'
