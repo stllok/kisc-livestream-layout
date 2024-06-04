@@ -35,5 +35,16 @@ export default {
 		},
 		plugins: []
 	},
-	safelist: ['bg-NM', 'bg-HD', 'bg-HR', 'bg-DT', 'bg-FM', 'bg-TB', 'bg-TEAMRED', 'bg-TEAMBLUE', 'text-TEAMRED', 'text-TEAMBLUE']
+	safelist: [
+		'bg-NM',
+		'bg-HD',
+		'bg-HR',
+		'bg-DT',
+		'bg-FM',
+		'bg-TB',
+		'bg-TEAMRED',
+		'bg-TEAMBLUE',
+		'text-TEAMRED',
+		'text-TEAMBLUE'
+	]
 };

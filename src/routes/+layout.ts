@@ -4,7 +4,7 @@ export const csr = true;
 
 export interface MapPools {
 	string: {
-		name: string,
-		id: number
-	}[]
+		name: string;
+		id: number;
+	}[];
 }

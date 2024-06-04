@@ -1,38 +1,30 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
+	import { broadcase_team_picking } from '$lib/state/obs_ws';
 	import type { MapPools } from '../+layout';
 	import PointLayout from '../PointLayout.svelte';
 	import Map from './Map.svelte';
-
 
 	function get_mappool_link(stage: string): string {
 		return dev ? '/bracket/sample_mappool.json' : `/bracket/${stage}.json`;
 	}
 
-	let mappool_req: Promise<MapPools> = fetch(get_mappool_link('F')).then((_) =>
-		_.json()
-	);
+	let mappool_req: Promise<MapPools> = fetch(get_mappool_link('F')).then((_) => _.json());
 
 	let is_ban = true;
 	let is_team_red = true;
 </script>
 
-<div class="flex flex-col h-screen justify-between">
+<div class="flex h-screen flex-col justify-between">
 	<div>
 		<PointLayout />
 		<!-- Map grid -->
-		<div class="flex flex-col gap-y-4 mt-4">
+		<div class="mt-4 flex flex-col gap-y-4">
 			{#await mappool_req then mappool}
 				{#each Object.entries(mappool) as [mod, maps]}
 					<div class="flex flex-wrap items-center justify-around gap-x-4 gap-y-4">
 						{#each maps as map, i}
-							<Map
-								{mod}
-								idx={i + 1}
-								name={map.name}
-								bind:is_ban
-								bind:is_team_red
-							/>
+							<Map {mod} id={maps.id} idx={i + 1} name={map.name} bind:is_ban bind:is_team_red />
 						{/each}
 					</div>
 				{/each}
@@ -44,25 +36,31 @@
 		<div class="flex flex-col gap-2">
 			<button
 				disabled={is_ban}
-				on:click={(_) => (is_ban = !is_ban)}
+				on:click={() => (is_ban = !is_ban)}
 				class="bg-red-200 hover:bg-red-400 active:bg-red-600 disabled:bg-red-500">BAN</button
 			>
 			<button
 				disabled={!is_ban}
-				on:click={(_) => (is_ban = !is_ban)}
+				on:click={() => (is_ban = !is_ban)}
 				class="bg-green-200 hover:bg-green-400 active:bg-green-600 disabled:bg-green-500"
 				>PICK</button
+			>
+			<button
+				disabled={!is_ban}
+				on:click={() => broadcase_team_picking(is_team_red)}
+				class="bg-green-200 hover:bg-green-400 active:bg-green-600 disabled:bg-green-500"
+				>SIIBAI!</button
 			>
 		</div>
 		<div class="flex flex-col gap-2">
 			<button
 				disabled={is_team_red}
-				on:click={(_) => (is_team_red = !is_team_red)}
+				on:click={() => (is_team_red = !is_team_red)}
 				class="bg-red-200 hover:bg-red-400 active:bg-red-600 disabled:bg-red-500">TEAM RED</button
 			>
 			<button
 				disabled={!is_team_red}
-				on:click={(_) => (is_team_red = !is_team_red)}
+				on:click={() => (is_team_red = !is_team_red)}
 				class="bg-blue-200 hover:bg-blue-400 active:bg-blue-600 disabled:bg-blue-500"
 				>TEAM BLUE</button
 			>

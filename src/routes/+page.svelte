@@ -1,21 +1,13 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import ChatBox from './ChatBox.svelte';
 	import DifferenceBar from './DifferenceBar.svelte';
 	import MapInfo from './MapInfo.svelte';
 	import PointInfo from './PointInfo.svelte';
-	import OBSWebSocket from 'obs-websocket-js';
 	import { MANAGER_DATA, MENU_DATA } from '$lib/state/gosu';
-
-	const OBS_WS = new OBSWebSocket();
-	onMount(async () => {
-		await OBS_WS.connect();
-	});
 
 	window.addEventListener('obs-websocket-test-event', function (event) {
 		console.log(event);
 	});
-
 
 	$: ENABLE_CHAT = $MENU_DATA.isChatEnabled === 1;
 </script>
@@ -43,13 +35,17 @@
 		{#if !ENABLE_CHAT}
 			<DifferenceBar />
 		{/if}
-		<div class="relative mx-12 flex grow justify-center items-center">
+		<div class="relative mx-12 flex grow items-center justify-center">
 			{#if !ENABLE_CHAT}
-				<p class="absolute left-0 text-7xl font-bold text-red-400">{$MANAGER_DATA.gameplay.score.left}</p>
+				<p class="absolute left-0 text-7xl font-bold text-red-400">
+					{$MANAGER_DATA.gameplay.score.left}
+				</p>
 			{/if}
 			<MapInfo />
 			{#if !ENABLE_CHAT}
-				<p class="absolute text-7xl right-0 font-bold text-blue-500">{$MANAGER_DATA.gameplay.score.right}</p>
+				<p class="absolute right-0 text-7xl font-bold text-blue-500">
+					{$MANAGER_DATA.gameplay.score.right}
+				</p>
 			{:else}
 				<ChatBox />
 			{/if}
