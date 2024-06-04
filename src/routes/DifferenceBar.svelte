@@ -1,9 +1,10 @@
 <script lang="ts">
-	export let red_score: number;
-	export let blue_score: number;
+	import { MANAGER_DATA } from "$lib/state/gosu";
 
-	let is_tie = red_score == blue_score;
-	let is_red_win = red_score > blue_score;
+	$: red_score = $MANAGER_DATA.gameplay.score.left;
+	$: blue_score = $MANAGER_DATA.gameplay.score.right;
+	$: is_tie = red_score == blue_score;
+	$: is_red_win = red_score > blue_score;
 </script>
 
 <div class="flex h-4 w-screen *:duration-200">
@@ -18,7 +19,7 @@
 </div>
 
 <div class="flex *:duration-200">
-	<div class="h-full" style:width="{is_tie ? 50 : (red_score / (red_score + blue_score)) * 100}%" />
+	<div class=" h-full" style:width="{is_tie ? 50 : (red_score / (red_score + blue_score)) * 100}%" />
 	<p
 		class="text-5xl font-bold text-black"
 		class:red_win={is_red_win && !is_tie}

@@ -1,18 +1,15 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
+	import type { MapPools } from '../+layout';
+	import PointLayout from '../PointLayout.svelte';
 	import Map from './Map.svelte';
 
-	interface MappoolData {
-		artist: string;
-		title: string;
-		difficulty: string;
-	}
 
 	function get_mappool_link(stage: string): string {
-		return dev ? '/sample_mappool.json' : `/bracket/${stage}.json`;
+		return dev ? '/bracket/sample_mappool.json' : `/bracket/${stage}.json`;
 	}
 
-	let mappool_req: Promise<{ string: MappoolData[] }> = fetch(get_mappool_link('F')).then((_) =>
+	let mappool_req: Promise<MapPools> = fetch(get_mappool_link('F')).then((_) =>
 		_.json()
 	);
 
@@ -20,26 +17,29 @@
 	let is_team_red = true;
 </script>
 
-<div class="flex flex-col justify-between">
-	<div class="flex h-screen flex-col gap-y-10">
-		{#await mappool_req then mappool}
-			{#each Object.entries(mappool) as [mod, maps]}
-				<div class="flex flex-wrap items-center justify-around gap-x-32 gap-y-8">
-					{#each maps as map, i}
-						<Map
-							{mod}
-							idx={i + 1}
-							artist={map.artist}
-							title={map.title}
-							difficulty={map.difficulty}
-							bind:is_ban
-							bind:is_team_red
-						/>
-					{/each}
-				</div>
-			{/each}
-		{/await}
+<div class="flex flex-col h-screen justify-between">
+	<div>
+		<PointLayout />
+		<!-- Map grid -->
+		<div class="flex flex-col gap-y-4 mt-4">
+			{#await mappool_req then mappool}
+				{#each Object.entries(mappool) as [mod, maps]}
+					<div class="flex flex-wrap items-center justify-around gap-x-4 gap-y-4">
+						{#each maps as map, i}
+							<Map
+								{mod}
+								idx={i + 1}
+								name={map.name}
+								bind:is_ban
+								bind:is_team_red
+							/>
+						{/each}
+					</div>
+				{/each}
+			{/await}
+		</div>
 	</div>
+	<!-- Control panel -->
 	<div class="flex gap-2 bg-gray-400 p-2">
 		<div class="flex flex-col gap-2">
 			<button

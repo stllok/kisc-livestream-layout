@@ -1,37 +1,36 @@
 <script lang="ts">
-	export let img_path: string;
-	export let title: string;
-	export let artist: string;
-	export let mapper: string;
-	export let length: number;
-	export let diff_name: string;
-	export let cs: number;
-	export let ar: number;
-	export let od: number;
-	export let bpm: number;
-	export let star_rating: number;
+	import { BEATMAP_METADATA, GOSUMEMORY_ADDRESS } from '$lib/state/gosu';
 
 	$: THIRD_LINE = [
-		['SR', `${star_rating}*`],
-		['Length', `${Math.floor(length / 1000 / 60)}:${Math.floor((length / 1000) % 60)}`],
-		['', `[${diff_name}]`]
+		['SR', `${$BEATMAP_METADATA.stats.fullSR}*`],
+		[
+			'Length',
+			`${('00' + Math.floor($BEATMAP_METADATA.time.full / 1000 / 60)).slice(-2)}:${('00' + Math.floor(($BEATMAP_METADATA.time.mp3 / 1000) % 60)).slice(-2)}`
+		],
+		['', `[${$BEATMAP_METADATA.metadata.difficulty}]`]
 	];
 
 	$: FOURTH_LINE = [
-		['CS', `${cs}`],
-		['AR', `${ar}`],
-		['OD', `${od}`],
-		['BPM', `${bpm}`]
+		['CS', `${$BEATMAP_METADATA.stats.memoryCS}`],
+		['AR', `${$BEATMAP_METADATA.stats.memoryAR}`],
+		['OD', `${$BEATMAP_METADATA.stats.memoryOD}`],
+		['BPM', `${$BEATMAP_METADATA.stats.BPM.max}`]
 	];
 </script>
 
-<div class="flex h-36 gap-2 *:text-[#7e7295]">
-	<img class="h-36 w-auto rounded-2xl border-2 border-[#7e22ce]" src={img_path} alt="BG" />
-	<div class="flex w-96 flex-col justify-around">
-		<p class="overflow-visible text-4xl font-extrabold">{title}</p>
+<div
+	class="flex h-36 w-full gap-2 self-center duration-1000 *:text-[#7e7295] first:pb-2 [&:nth-child(2)]:justify-center"
+>
+	<img
+		class="h-36 w-auto rounded-2xl border-2 border-[#7e22ce]"
+		src={`http://${GOSUMEMORY_ADDRESS}/Songs/${$BEATMAP_METADATA.path.full}`}
+		alt="BG"
+	/>
+	<div class="flex min-w-96 flex-col justify-around">
+		<p class="overflow-visible text-4xl font-extrabold">{$BEATMAP_METADATA.metadata.title}</p>
 		<div class="flex justify-between *:text-2xl *:font-bold">
-			<p>{artist}</p>
-			<p>{mapper}</p>
+			<p>{$BEATMAP_METADATA.metadata.artist}</p>
+			<p>{$BEATMAP_METADATA.metadata.mapper}</p>
 		</div>
 		<div class="flex justify-between">
 			{#each THIRD_LINE as line}
