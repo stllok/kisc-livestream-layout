@@ -31,6 +31,12 @@ export default {
 				},
 				TEAMRED: {
 					DEFAULT: '#F87171'
+				},
+				TEAMRED_BORDER: {
+					DEFAULT: '#ee6862'
+				},
+				TEAMBLUE_BORDER: {
+					DEFAULT: '#598aea'
 				}
 			}
 		},
@@ -46,6 +52,8 @@ export default {
 		'bg-TEAMRED',
 		'bg-TEAMBLUE',
 		'text-TEAMRED',
-		'text-TEAMBLUE'
+		'text-TEAMBLUE',
+		'border-TEAMRED_BORDER',
+		'border-TEAMBLUE_BORDER'
 	]
 };
