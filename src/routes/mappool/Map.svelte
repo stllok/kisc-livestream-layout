@@ -32,31 +32,35 @@
 >
 	{#if RESULT !== null}
 		<p
-			class="absolute top-0 z-30 flex h-full w-11/12 items-center justify-center text-2xl font-semibold"
+			class="absolute top-0 z-30 flex h-full w-[28rem] items-center justify-center text-2xl font-semibold"
 			class:text-TEAMRED={RESULT[1]}
 			class:text-TEAMBLUE={!RESULT[1]}
 			transition:fade
 		>
 			{RESULT[1] ? team_red : team_blue} Banned
 		</p>
-		<div transition:fade class="absolute top-0 z-20 h-full w-11/12 bg-black opacity-65"></div>
+		<div transition:fade class="absolute top-0 z-20 h-full w-[28rem] bg-black opacity-65"></div>
 	{/if}
 	<div
-		style:background-image={`url('https://assets.ppy.sh/beatmaps/${map.mapset_id}/covers/cover.jpg')`}
+		style:background-image={`url('https://assets.ppy.sh/beatmaps/${map.mapset_id}/covers/cover@2x.jpg')`}
 		style:box-shadow={'4px 4px 21px rgba(0,0,0,0.58)'}
-		class="absolute top-0 -z-10 h-full w-11/12 bg-cover bg-local bg-center bg-origin-padding"
+		class="absolute top-0 -z-10 h-full w-[28.5rem] bg-cover bg-local bg-center bg-origin-padding blur-[1px]"
 	/>
 	<div class="absolute top-0 flex h-full w-full items-center justify-between">
-		<p
-			class="ml-2 w-[24rem] font-sourcehansan text-[1.5vh] font-semibold text-white drop-shadow-xl"
-			style:text-shadow={'4px 4px 8px black'}
-		>
-			{map.Title}
-		</p>
+		<div class="ml-2 w-[26rem] flex flex-col *:font-sourcehansan">
+			<p
+				class="text-[1.5vh] font-semibold text-white drop-shadow-xl"
+				style:text-shadow={'4px 4px 8px black'}
+			>
+				{map.Title}
+			</p>
+			<p class="text-white text-[1vh]" 
+			style:text-shadow={'4px 4px 8px black'}>Artist: {map.Artist} Difficulty: {map.Difficulty}</p>
+		</div>
 
 		<p
 			style:box-shadow={'4px 4px 21px rgba(0,0,0,0.68)'}
-			class="z-30 w-24 rounded-xl bg-{mod} p-1 text-3xl font-bold text-white shadow-xl"
+			class="z-30 w-14 rounded-xl bg-{mod} p-1 text-xl font-bold text-white shadow-xl"
 		>
 			{`${mod}${mod != 'TB' ? idx : ''}`}
 		</p>

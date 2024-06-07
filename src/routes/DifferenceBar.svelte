@@ -1,46 +1,54 @@
 <script lang="ts">
 	import { MANAGER_DATA } from '$lib/state/gosu';
 
-	$: red_score = $MANAGER_DATA.gameplay.score.left;
-	$: blue_score = $MANAGER_DATA.gameplay.score.right;
-	$: is_tie = red_score == blue_score;
-	$: is_red_win = red_score > blue_score;
+	$: is_tie = $MANAGER_DATA.gameplay.score.left == $MANAGER_DATA.gameplay.score.right;
+	$: is_red_win = $MANAGER_DATA.gameplay.score.left > $MANAGER_DATA.gameplay.score.right;
 </script>
 
-<div class="flex h-4 w-screen *:duration-200">
+<!-- Color Bar -->
+<div class="flex h-4 w-screen *:duration-500">
 	<div
 		class="h-full bg-TEAMRED"
-		style:width="{is_tie ? 50 : (red_score / (red_score + blue_score)) * 100}%"
+		style:width="{is_tie
+			? 50
+			: ($MANAGER_DATA.gameplay.score.left /
+					($MANAGER_DATA.gameplay.score.left + $MANAGER_DATA.gameplay.score.right)) *
+				100}%"
 	/>
 	<div
 		class="h-full bg-TEAMBLUE"
-		style:width="{is_tie ? 50 : (blue_score / (red_score + blue_score)) * 100}%"
+		style:width="{is_tie
+			? 50
+			: ($MANAGER_DATA.gameplay.score.right /
+					($MANAGER_DATA.gameplay.score.left + $MANAGER_DATA.gameplay.score.right)) *
+				100}%"
 	/>
 </div>
 
-<div class="flex *:duration-200">
+<!-- Diff Number -->
+<div class="flex *:duration-500">
 	<div
-		class=" h-full"
-		style:width="{is_tie ? 50 : (red_score / (red_score + blue_score)) * 100}%"
+		class="h-full"
+		style:width="{is_tie
+			? 50
+			: ($MANAGER_DATA.gameplay.score.left /
+					($MANAGER_DATA.gameplay.score.left + $MANAGER_DATA.gameplay.score.right)) *
+				100}%"
 	/>
 	<p
-		class="text-5xl font-bold text-black"
-		class:red_win={is_red_win && !is_tie}
-		class:blue_win={!is_red_win && !is_tie}
+		class="text-5xl font-bold"
+		class:text-TEAMRED={is_red_win && !is_tie}
+		class:text-TEAMBLUE={!is_red_win && !is_tie}
+		class:text-black={is_tie}
 	>
-		{Math.abs(red_score - blue_score)}
+		{Math.abs($MANAGER_DATA.gameplay.score.left - $MANAGER_DATA.gameplay.score.right)}
 	</p>
 	<div
 		class="h-full"
-		style:width="{is_tie ? 50 : (blue_score / (red_score + blue_score)) * 100}%"
+		style:width="{is_tie
+			? 50
+			: ($MANAGER_DATA.gameplay.score.right /
+					($MANAGER_DATA.gameplay.score.left + $MANAGER_DATA.gameplay.score.right)) *
+				100}%"
 	/>
 </div>
-
-<style lang="postcss">
-	.red_win {
-		@apply text-red-400;
-	}
-	.blue_win {
-		@apply text-blue-400;
-	}
-</style>

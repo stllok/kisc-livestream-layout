@@ -5,7 +5,7 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				sourcehansan: ['SourceHanSans-VF', 'sans']
+				sourcehansan: ['SourceHanSans', 'sans']
 			},
 			colors: {
 				NM: {
