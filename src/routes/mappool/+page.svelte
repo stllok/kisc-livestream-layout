@@ -22,9 +22,9 @@
 		<div class="mt-4 flex flex-col gap-y-4">
 			{#await mappool_req then mappool}
 				{#each Object.entries(mappool) as [mod, maps]}
-					<div class="flex flex-wrap items-center justify-around gap-x-4 gap-y-4">
+					<div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-4">
 						{#each maps as map, i}
-							<Map {mod}  idx={i + 1} {map} bind:is_ban bind:is_team_red />
+							<Map {mod} idx={i + 1} {map} bind:is_ban bind:is_team_red />
 						{/each}
 					</div>
 				{/each}
@@ -47,7 +47,7 @@
 			>
 			<button
 				disabled={!is_ban}
-				on:click={() => broadcase_team_picking(is_team_red,is_ban)}
+				on:click={() => broadcase_team_picking(is_team_red, is_ban)}
 				class="bg-green-200 hover:bg-green-400 active:bg-green-600 disabled:bg-green-500"
 				>SIIBAI!</button
 			>

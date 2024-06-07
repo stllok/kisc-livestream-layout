@@ -7,7 +7,6 @@ export interface MapPools {
 }
 
 export interface MapPoolMetadata {
-
 	Artist: string;
 	Title: string;
 	Difficulty: string;
