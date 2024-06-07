@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { GOSUMEMORY_ADDRESS } from '$lib/state/gosu';
 	import { fade } from 'svelte/transition';
+	import type { MapPoolMetadata } from '../+layout';
 
 	// team data
 	export const team_red: string = 'UNNAMED RED';
@@ -9,9 +10,7 @@
 	// map metadata
 	export let mod: string;
 	export let idx: number;
-	export let id: number;
-	export let name: string;
-
+	export let map: MapPoolMetadata;
 	// status
 	export let is_ban: boolean;
 	export let is_team_red: boolean;
@@ -43,16 +42,16 @@
 		<div transition:fade class="absolute top-0 z-20 h-full w-11/12 bg-black opacity-65"></div>
 	{/if}
 	<div
-		style:background-image={`url('http://${GOSUMEMORY_ADDRESS}/Songs/${id} ${name}')`}
+		style:background-image={`url('https://assets.ppy.sh/beatmaps/${map.mapset_id}/covers/cover.jpg')`}
 		style:box-shadow={'4px 4px 21px rgba(0,0,0,0.58)'}
 		class="absolute top-0 -z-10 h-full w-11/12 bg-cover bg-local bg-center bg-origin-padding"
 	/>
 	<div class="absolute top-0 flex h-full w-full items-center justify-between">
 		<p
-			class="drop-shadow-2x loverflow-hidden ml-5 overflow-clip text-ellipsis text-nowrap font-sourcehansan text-2xl font-semibold text-white"
+			class="drop-shadow-2xl overflow-hidden ml-5 text-ellipsis text-nowrap text-2xl font-semibold text-white"
 			style:text-shadow={'4px 4px 8px black'}
 		>
-			{name}
+			{map.Title}
 		</p>
 
 		<p
