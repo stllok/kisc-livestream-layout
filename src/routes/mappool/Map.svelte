@@ -49,7 +49,7 @@
 	/>
 	<div class="absolute top-0 flex h-full w-full items-center justify-between">
 		<p
-			class="drop-shadow-2x loverflow-hidden ml-5 overflow-clip text-ellipsis text-nowrap font-sourcehansan text-2xl font-semibold text-white"
+			class="ml-2 w-[24rem] font-sourcehansan text-[1.5vh] font-semibold text-white drop-shadow-xl"
 			style:text-shadow={'4px 4px 8px black'}
 		>
 			{name}
