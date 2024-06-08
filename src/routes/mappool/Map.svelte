@@ -1,11 +1,8 @@
 <script lang="ts">
-	import { GOSUMEMORY_ADDRESS } from '$lib/state/gosu';
-	import { fade } from 'svelte/transition';
+	import { MANAGER_DATA } from '$lib/state/gosu';
+	import { fade, fly } from 'svelte/transition';
 	import type { MapPoolMetadata } from '../+layout';
-
-	// team data
-	export const team_red: string = 'UNNAMED RED';
-	export const team_blue: string = 'UNNAMED BLUE';
+	import { bounceOut, quintOut } from 'svelte/easing';
 
 	// map metadata
 	export let mod: string;
@@ -15,6 +12,8 @@
 	export let is_ban: boolean;
 	export let is_team_red: boolean;
 
+	let pick_effect = false;
+
 	let RESULT: [boolean, boolean] | null = null;
 	function on_set() {
 		RESULT = RESULT === null ? [is_ban, is_team_red] : RESULT;
@@ -23,6 +22,12 @@
 	function on_unset() {
 		RESULT = null;
 	}
+
+	async function trigger_pick_flashing() {
+		pick_effect = true;
+		await new Promise((resolve) => setTimeout(resolve, 1));
+		pick_effect = false;
+	}
 </script>
 
 <button
@@ -30,7 +35,13 @@
 	on:click={on_set}
 	on:contextmenu|preventDefault={on_unset}
 >
-	{#if RESULT !== null}
+	{#if pick_effect}
+		<div
+			class="-z-10 h-full w-full bg-white"
+			out:fade={{ delay: 0, duration: 3000, easing: bounceOut }}
+		></div>
+	{/if}
+	{#if RESULT !== null && RESULT[0]}
 		<!-- On BAN action -->
 		<p
 			class="absolute top-0 z-30 flex h-full w-[34.5rem] items-center justify-center text-2xl font-semibold"
@@ -38,9 +49,20 @@
 			class:text-TEAMBLUE={!RESULT[1]}
 			transition:fade
 		>
-			{RESULT[1] ? team_red : team_blue} Banned
+			{RESULT[1] ? $MANAGER_DATA.teamName.left : $MANAGER_DATA.teamName.right} Banned
 		</p>
 		<div transition:fade class="absolute top-0 z-20 h-full w-[34.5rem] bg-black opacity-65"></div>
+	{:else if RESULT !== null && !RESULT[0]}
+		<!-- On PICK Action -->
+		<p
+			class="absolute -bottom-5 -left-2 z-10 h-6 w-auto bg-TEAMRED px-2 font-semibold text-white"
+			class:bg-TEAMRED={RESULT[1]}
+			class:bg-TEAMBLUE={!RESULT[1]}
+			transition:fly={{ delay: 0, duration: 1000, x: 0, y: 100, opacity: 0.1, easing: quintOut }}
+			on:introend={trigger_pick_flashing}
+		>
+			{RESULT[1] ? $MANAGER_DATA.teamName.left : $MANAGER_DATA.teamName.right} pick
+		</p>
 	{/if}
 	<!-- Background -->
 	<div
@@ -49,24 +71,35 @@
 		class="absolute top-0 -z-10 h-full w-[34.5rem] bg-cover bg-local bg-center bg-origin-padding brightness-[.8]"
 	/>
 	<div class="absolute top-0 flex h-full w-full items-center justify-between">
-		<!-- Map Metadata -->
+		<!-- Metadata -->
 		<div class="flex w-[32rem] flex-col px-4 *:font-sourcehansan">
+			<!-- Map's Song Name -->
 			<p
 				class="text-[1.5vh] font-semibold text-white drop-shadow-xl"
 				style:text-shadow={'4px 4px 8px black'}
 			>
 				{map.Title}
 			</p>
+			<!-- Map Metadata -->
 			<div class="flex justify-between">
-				<p class="text-[1vh] text-white" style:text-shadow={'4px 4px 8px black'}>
-					Artist: {map.Artist}
-				</p>
-				<p class="text-[1vh] text-white" style:text-shadow={'4px 4px 8px black'}>
-					Mapper: {map.Mapper}
-				</p>
-				<p class="text-[1vh] text-white" style:text-shadow={'4px 4px 8px black'}>
-					Difficulty: {map.Difficulty}
-				</p>
+				<div class="inline-flex *:text-[1vh] *:text-white">
+					<p class="" style:text-shadow={'4px 4px 8px black'}>Artist:</p>
+					<p class="font-extrabold" style:text-shadow={'4px 4px 8px black'}>
+						{map.Artist}
+					</p>
+				</div>
+				<div class="inline-flex *:text-[1vh] *:text-white">
+					<p class="" style:text-shadow={'4px 4px 8px black'}>Mapper:</p>
+					<p class="font-extrabold" style:text-shadow={'4px 4px 8px black'}>
+						{map.Mapper}
+					</p>
+				</div>
+				<div class="inline-flex *:text-[1vh] *:text-white">
+					<p class="" style:text-shadow={'4px 4px 8px black'}>Difficulty:</p>
+					<p class="font-extrabold" style:text-shadow={'4px 4px 8px black'}>
+						{map.Difficulty}
+					</p>
+				</div>
 			</div>
 		</div>
 		<!-- Mod Badge -->

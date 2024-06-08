@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
-	import { broadcase_team_picking } from '$lib/state/obs_ws';
+	import { MANAGER_DATA } from '$lib/state/gosu';
 	import type { MapPools } from '../+layout';
 	import PointLayout from '../PointLayout.svelte';
 	import Map from './Map.svelte';
@@ -45,24 +45,19 @@
 				class="bg-green-200 hover:bg-green-400 active:bg-green-600 disabled:bg-green-500"
 				>PICK</button
 			>
-			<button
-				disabled={!is_ban}
-				on:click={() => broadcase_team_picking(is_team_red, is_ban)}
-				class="bg-green-200 hover:bg-green-400 active:bg-green-600 disabled:bg-green-500"
-				>SIIBAI!</button
-			>
 		</div>
 		<div class="flex flex-col gap-2">
 			<button
 				disabled={is_team_red}
 				on:click={() => (is_team_red = !is_team_red)}
-				class="bg-red-200 hover:bg-red-400 active:bg-red-600 disabled:bg-red-500">TEAM RED</button
+				class="bg-red-200 hover:bg-red-400 active:bg-red-600 disabled:bg-red-500"
+				>{$MANAGER_DATA.teamName.left}</button
 			>
 			<button
 				disabled={!is_team_red}
 				on:click={() => (is_team_red = !is_team_red)}
 				class="bg-blue-200 hover:bg-blue-400 active:bg-blue-600 disabled:bg-blue-500"
-				>TEAM BLUE</button
+				>{$MANAGER_DATA.teamName.right}</button
 			>
 		</div>
 	</div>
