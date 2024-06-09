@@ -5,10 +5,6 @@
 	import PointInfo from './PointInfo.svelte';
 	import { MANAGER_DATA, MENU_DATA } from '$lib/state/gosu';
 
-	window.addEventListener('obs-websocket-test-event', function (event) {
-		console.log(event);
-	});
-
 	$: ENABLE_CHAT = $MENU_DATA.isChatEnabled === 1;
 </script>
 

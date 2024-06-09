@@ -2,7 +2,7 @@ import OBSWebSocket from 'obs-websocket-js';
 import { writable } from 'svelte/store';
 
 const OBS_WS = new OBSWebSocket();
-await OBS_WS.connect();
+OBS_WS.connect();
 
 export const change_scenes = async (sceneName: string) => {
 	await OBS_WS.call('SetCurrentProgramScene', { sceneName });

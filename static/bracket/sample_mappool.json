@@ -82,16 +82,16 @@
 			"Difficulty": "Insane",
 			"Mapper": "Seikatu",
 			"mapset_id": 306782
-		}
-	],
-	"FM": [
+		},
 		{
 			"Artist": "Akatsuki Records",
 			"Title": "S.A.R.I.E.L.",
 			"Difficulty": "Hard",
 			"Mapper": "Mirash",
 			"mapset_id": 2091456
-		},
+		}
+	],
+	"FM": [
 		{
 			"Artist": "Kobaryo",
 			"Title": "SUPER EMULATOR [feat. HiTNEX-X]",

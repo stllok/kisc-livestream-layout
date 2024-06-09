@@ -12,7 +12,7 @@
 	export let is_ban: boolean;
 	export let is_team_red: boolean;
 
-	let pick_effect = false;
+	let PICK_EFFECT = false;
 
 	let RESULT: [boolean, boolean] | null = null;
 	function on_set() {
@@ -24,9 +24,9 @@
 	}
 
 	async function trigger_pick_flashing() {
-		pick_effect = true;
+		PICK_EFFECT = true;
 		await new Promise((resolve) => setTimeout(resolve, 1));
-		pick_effect = false;
+		PICK_EFFECT = false;
 	}
 </script>
 
@@ -35,7 +35,7 @@
 	on:click={on_set}
 	on:contextmenu|preventDefault={on_unset}
 >
-	{#if pick_effect}
+	{#if PICK_EFFECT}
 		<div
 			class="-z-10 h-full w-full bg-white"
 			out:fade={{ delay: 0, duration: 3000, easing: bounceOut }}
@@ -55,7 +55,7 @@
 	{:else if RESULT !== null && !RESULT[0]}
 		<!-- On PICK Action -->
 		<p
-			class="absolute -bottom-5 -left-2 z-10 h-6 w-auto bg-TEAMRED px-2 font-semibold text-white"
+			class="absolute -bottom-5 -left-2 z-10 h-6 w-auto px-2 font-semibold text-white"
 			class:bg-TEAMRED={RESULT[1]}
 			class:bg-TEAMBLUE={!RESULT[1]}
 			transition:fly={{ delay: 0, duration: 1000, x: 0, y: 100, opacity: 0.1, easing: quintOut }}
@@ -81,20 +81,20 @@
 				{map.Title}
 			</p>
 			<!-- Map Metadata -->
-			<div class="flex justify-between">
-				<div class="inline-flex *:text-[1vh] *:text-white">
+			<div class="flex justify-between *:text-[1vh]">
+				<div class="inline-flex *:text-white">
 					<p class="" style:text-shadow={'4px 4px 8px black'}>Artist:</p>
 					<p class="font-extrabold" style:text-shadow={'4px 4px 8px black'}>
 						{map.Artist}
 					</p>
 				</div>
-				<div class="inline-flex *:text-[1vh] *:text-white">
+				<div class="inline-flex *:text-white">
 					<p class="" style:text-shadow={'4px 4px 8px black'}>Mapper:</p>
 					<p class="font-extrabold" style:text-shadow={'4px 4px 8px black'}>
 						{map.Mapper}
 					</p>
 				</div>
-				<div class="inline-flex *:text-[1vh] *:text-white">
+				<div class="inline-flex *:text-white">
 					<p class="" style:text-shadow={'4px 4px 8px black'}>Difficulty:</p>
 					<p class="font-extrabold" style:text-shadow={'4px 4px 8px black'}>
 						{map.Difficulty}
