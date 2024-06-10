@@ -4,6 +4,21 @@ export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
 		extend: {
+			animation: {
+				fadein: 'fadeIn .5s ease-in-out',
+				fadeout: 'fadeOut .5s ease-in-out'
+			},
+
+			keyframes: {
+				fadeIn: {
+					from: { opacity: 0 },
+					to: { opacity: 1 }
+				},
+				fadeOut: {
+					from: { opacity: 1 },
+					to: { opacity: 0 }
+				}
+			},
 			fontFamily: {
 				sourcehansan: ['SourceHanSans', 'sans']
 			},
@@ -54,6 +69,7 @@ export default {
 		'text-TEAMRED',
 		'text-TEAMBLUE',
 		'border-TEAMRED_BORDER',
-		'border-TEAMBLUE_BORDER'
+		'border-TEAMBLUE_BORDER',
+		'hidden'
 	]
 };

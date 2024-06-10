@@ -2,7 +2,7 @@
 	import { fade } from 'svelte/transition';
 	import point from '$lib/assets/point.png?enhanced&w=50';
 	import not_point from '$lib/assets/not-point.png?enhanced&w=50';
-	import logo from '$lib/assets/logo.png?enhanced&w=100';
+	import logo from '$lib/assets/logo.png?enhanced&w=105&h=105';
 
 	export let teamname: string;
 	export let target_point: number;
@@ -13,7 +13,7 @@
 	<enhanced:img src={logo} alt="ICON" class="rounded-xl" fetchpriority="high" loading="eager" />
 	<div class="flex flex-col items-start justify-center group-last:items-end">
 		<p class="text-5xl font-bold text-TEAMRED group-last:text-TEAMBLUE">
-			{teamname === '' ? 'UNNAMED' : teamname}
+			{teamname}
 		</p>
 		<div class="flex gap-1 duration-100 group-last:flex-row-reverse">
 			{#each Array(target_point).keys() as i}
