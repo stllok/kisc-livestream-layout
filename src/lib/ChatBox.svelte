@@ -1,4 +1,5 @@
 <script lang="ts">
+	import autoAnimate from '@formkit/auto-animate';
 	import { MANAGER_DATA } from '$lib/state/gosu';
 	import Chat from './Chat.svelte';
 
@@ -13,6 +14,7 @@
 
 <div
 	class="flex h-full w-full flex-col overflow-hidden rounded-3xl bg-[#6c5d56] p-3"
+	use:autoAnimate
 	bind:this={LIST_DOM}
 >
 	{#each $MANAGER_DATA.chat ?? [] as chat}

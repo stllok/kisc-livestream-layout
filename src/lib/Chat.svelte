@@ -10,8 +10,8 @@
 		<p
 			class="text-xl font-bold"
 			class:ref={team == 0}
-			class:team_red={team == 1}
-			class:team_blue={team == 2}
+			class:text-TEAMRED={team == 1}
+			class:text-TEAMBLUE={team == 2}
 		>
 			{name}:
 		</p>
@@ -22,14 +22,6 @@
 </div>
 
 <style lang="postcss">
-	.team_red {
-		@apply text-red-400;
-	}
-
-	.team_blue {
-		@apply text-blue-400;
-	}
-
 	.ref {
 		@apply text-green-400;
 	}

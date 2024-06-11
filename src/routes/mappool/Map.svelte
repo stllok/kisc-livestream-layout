@@ -17,6 +17,10 @@
 
 	let RESULT: [boolean, boolean] | null = null;
 	function on_set() {
+		if (RESULT !== null) {
+			return;
+		}
+
 		RESULT = RESULT === null ? [is_ban, is_team_red] : RESULT;
 		is_team_red = !is_team_red;
 
