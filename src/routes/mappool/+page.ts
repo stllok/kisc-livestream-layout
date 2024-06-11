@@ -10,10 +10,3 @@ MANAGER_DATA.subscribe((data) => {
 
 	LAST_IPC_STATE = data.ipcState;
 });
-
-BEATMAP_METADATA.subscribe(async (data) => {
-	if (get(CURRENT_SCENE_NAME) === 'Mappool') {
-		await new Promise((resolve) => setTimeout(resolve, 15000));
-		change_scenes('Gameplay');
-	}
-});

@@ -26,7 +26,8 @@ OBS_WS.addListener('CustomEvent', (event) => {
 	IS_BAN_ENDED.set(event.eventData.is_ban);
 });
 
-OBS_WS.addListener('SceneNameChanged', (event) => {
+OBS_WS.addListener('CurrentProgramSceneChanged', (event) => {
+	console.log(`Detected scene changed from ${event.sceneName}`);
 	CURRENT_SCENE_NAME.set(event.sceneName);
 });
 

@@ -4,7 +4,7 @@ import { get } from 'svelte/store';
 
 let LAST_IPC_STATE = 1;
 MANAGER_DATA.subscribe((data) => {
-	if (LAST_IPC_STATE === 4 && data.ipcState === 1 && get(CURRENT_SCENE_NAME) === 'Gameplay') {
+	if (LAST_IPC_STATE === 4 && data.ipcState === 1) {
 		change_scenes('Mappool');
 	}
 
