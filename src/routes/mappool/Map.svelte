@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { MANAGER_DATA } from '$lib/state/gosu';
+	import { BEATMAP_METADATA, MANAGER_DATA } from '$lib/state/gosu';
 	import { fade, fly } from 'svelte/transition';
 	import type { MapPoolMetadata } from '../+layout';
 	import { bounceOut, quintOut } from 'svelte/easing';
@@ -17,6 +17,7 @@
 	let RESULT: [boolean, boolean] | null = null;
 	function on_set() {
 		RESULT = RESULT === null ? [is_ban, is_team_red] : RESULT;
+		is_team_red = !is_team_red;
 	}
 
 	function on_unset() {
@@ -27,6 +28,10 @@
 		PICK_EFFECT = true;
 		await new Promise((resolve) => setTimeout(resolve, 1));
 		PICK_EFFECT = false;
+	}
+
+	$: if ($BEATMAP_METADATA.set === map.mapset_id && !is_ban) {
+		on_set();
 	}
 </script>
 

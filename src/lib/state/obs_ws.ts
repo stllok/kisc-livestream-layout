@@ -4,6 +4,8 @@ import { writable } from 'svelte/store';
 const OBS_WS = new OBSWebSocket();
 OBS_WS.connect();
 
+const CURRENT_SCENE_NAME = writable('');
+
 export const change_scenes = async (sceneName: string) => {
 	await OBS_WS.call('SetCurrentProgramScene', { sceneName });
 };
@@ -24,4 +26,8 @@ OBS_WS.addListener('CustomEvent', (event) => {
 	IS_BAN_ENDED.set(event.eventData.is_ban);
 });
 
-export { IS_BAN_ENDED, IS_TEAM_RED_PICKING };
+OBS_WS.addListener('SceneNameChanged', (event) => {
+	CURRENT_SCENE_NAME.set(event.sceneName);
+});
+
+export { IS_BAN_ENDED, IS_TEAM_RED_PICKING, CURRENT_SCENE_NAME };

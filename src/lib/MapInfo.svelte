@@ -19,15 +19,15 @@
 </script>
 
 <div
-	class="flex h-36 w-full gap-2 self-center duration-1000 *:text-[#7e7295] first:pb-2 [&:nth-child(2)]:justify-center"
+	class="flex h-36 w-full gap-2 self-center duration-1000 *:h-36 *:text-[#7e7295] first:pb-2 [&:nth-child(2)]:justify-center"
 >
 	<img
-		class="h-36 w-auto rounded-2xl border-2 border-[#7e22ce]"
+		class="w-64 rounded-2xl border-2 border-[#7e22ce] object-cover"
 		src={`http://${GOSUMEMORY_ADDRESS}/Songs/${$BEATMAP_METADATA.path.full}`}
 		alt="BG"
 	/>
-	<div class="flex min-w-96 flex-col justify-around">
-		<p class="overflow-visible text-4xl font-extrabold">{$BEATMAP_METADATA.metadata.title}</p>
+	<div class="flex min-w-[32rem] flex-col justify-around">
+		<p class="overflow-visible text-3xl font-extrabold">{$BEATMAP_METADATA.metadata.title}</p>
 		<div class="flex justify-between *:text-2xl *:font-bold">
 			<p>{$BEATMAP_METADATA.metadata.artist}</p>
 			<p>{$BEATMAP_METADATA.metadata.mapper}</p>

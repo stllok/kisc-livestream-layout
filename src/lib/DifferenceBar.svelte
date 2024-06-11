@@ -1,8 +1,17 @@
 <script lang="ts">
 	import { MANAGER_DATA } from '$lib/state/gosu';
+	import { cubicOut } from 'svelte/easing';
+	import { tweened } from 'svelte/motion';
 
 	$: is_tie = $MANAGER_DATA.gameplay.score.left == $MANAGER_DATA.gameplay.score.right;
 	$: is_red_win = $MANAGER_DATA.gameplay.score.left > $MANAGER_DATA.gameplay.score.right;
+
+	const DIFF = tweened(0, {
+		duration: 200,
+		easing: cubicOut
+	});
+
+	$: DIFF.set(Math.abs($MANAGER_DATA.gameplay.score.left - $MANAGER_DATA.gameplay.score.right));
 </script>
 
 <!-- Color Bar -->
@@ -41,7 +50,7 @@
 		class:text-TEAMBLUE={!is_red_win && !is_tie}
 		class:text-black={is_tie}
 	>
-		{Math.abs($MANAGER_DATA.gameplay.score.left - $MANAGER_DATA.gameplay.score.right)}
+		{$DIFF.toFixed(0)}
 	</p>
 	<div
 		class="h-full"

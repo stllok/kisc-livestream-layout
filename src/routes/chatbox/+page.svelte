@@ -1,5 +1,5 @@
 <script>
-	import ChatBox from '../ChatBox.svelte';
+	import ChatBox from '$lib/ChatBox.svelte';
 </script>
 
 <div class="h-screen w-screen">

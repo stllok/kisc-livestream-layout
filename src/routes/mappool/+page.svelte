@@ -2,7 +2,7 @@
 	import { dev } from '$app/environment';
 	import { MANAGER_DATA } from '$lib/state/gosu';
 	import type { MapPools } from '../+layout';
-	import PointLayout from '../PointLayout.svelte';
+	import PointLayout from '$lib/PointLayout.svelte';
 	import Map from './Map.svelte';
 
 	function get_mappool_link(stage: string): string {
