@@ -30,6 +30,7 @@
 	on:keydown={(e) => {
 		if (dev && e.key === 't') {
 			FORCE_ENABLE_CHAT = !FORCE_ENABLE_CHAT;
+			console.log('?', FORCE_ENABLE_CHAT);
 		}
 	}}
 />

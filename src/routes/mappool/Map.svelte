@@ -3,6 +3,7 @@
 	import { fade, fly } from 'svelte/transition';
 	import type { MapPoolMetadata } from '../+layout';
 	import { bounceOut, quintOut } from 'svelte/easing';
+	import { CURRENT_SCENE_NAME, change_scenes } from '$lib/state/obs_ws';
 
 	// map metadata
 	export let mod: string;
@@ -18,6 +19,20 @@
 	function on_set() {
 		RESULT = RESULT === null ? [is_ban, is_team_red] : RESULT;
 		is_team_red = !is_team_red;
+
+		if (is_ban) {
+			return;
+		}
+
+		// Auto switch back to Gameplay if it's pick
+		new Promise((resolve) => {
+			setTimeout(() => {
+				if ($CURRENT_SCENE_NAME === 'Mappool') {
+					change_scenes('Gameplay');
+				}
+				resolve(undefined);
+			}, 15000);
+		});
 	}
 
 	function on_unset() {

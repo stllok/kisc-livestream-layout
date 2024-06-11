@@ -75,9 +75,6 @@ export interface BeatmapMetadata {
 	};
 }
 
-const GOSUMEMORY_ADDRESS = '127.0.0.1:24050';
-const GOSU_WS = new WebSocket(`ws://${GOSUMEMORY_ADDRESS}/ws`);
-
 const MANAGER_DATA: Writable<TourneyManager> = writable({
 	ipcState: 0,
 	bestOF: 1,
@@ -99,7 +96,7 @@ const MANAGER_DATA: Writable<TourneyManager> = writable({
 });
 
 const MENU_DATA: Writable<MenuData> = writable({
-	isChatEnabled: 1
+	isChatEnabled: 0
 });
 
 const BEATMAP_METADATA: Writable<BeatmapMetadata> = writable({
@@ -146,6 +143,8 @@ const BEATMAP_METADATA: Writable<BeatmapMetadata> = writable({
 	}
 });
 
+const GOSUMEMORY_ADDRESS = '127.0.0.1:24050';
+const GOSU_WS = new WebSocket(`ws://${GOSUMEMORY_ADDRESS}/ws`);
 GOSU_WS.addEventListener('message', (event) => {
 	const raw_data = JSON.parse(event.data);
 
