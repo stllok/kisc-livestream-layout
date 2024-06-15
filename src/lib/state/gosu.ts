@@ -76,10 +76,10 @@ export interface BeatmapMetadata {
 }
 
 const MANAGER_DATA: Writable<TourneyManager> = writable({
-	ipcState: 0,
+	ipcState: 3,
 	bestOF: 1,
 	teamName: {
-		left: 'TEAM RED',
+		left: '红队',
 		right: 'TEAM BLUE'
 	},
 	stars: {

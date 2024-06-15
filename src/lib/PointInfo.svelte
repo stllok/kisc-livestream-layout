@@ -15,7 +15,7 @@
 		loading="eager"
 	/>
 	<div class="flex flex-col items-start justify-between group-last:items-end">
-		<p class="text-5xl font-extrabold text-TEAMRED group-last:text-TEAMBLUE">
+		<p class="font-misans text-5xl font-extrabold text-TEAMRED group-last:text-TEAMBLUE">
 			{teamname}
 		</p>
 		<div class="flex gap-1 duration-100 group-last:flex-row-reverse">

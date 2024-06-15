@@ -10,4 +10,11 @@
 		font-display: swap;
 		src: url('/font/SourceHanSansSC-Regular.otf');
 	}
+	@font-face {
+		font-family: 'Misans';
+		font-style: bold;
+		font-weight: 600;
+		font-display: swap;
+		src: url('/font/MiSans-Bold.otf');
+	}
 }

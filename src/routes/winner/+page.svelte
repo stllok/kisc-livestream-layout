@@ -13,6 +13,6 @@
 		class:text-TEAMBLUE={$MANAGER_DATA.stars.right > $MANAGER_DATA.stars.left}
 		class:text-TEAMRED={$MANAGER_DATA.stars.left > $MANAGER_DATA.stars.right}
 	>
-		WINNER
+		{$MANAGER_DATA.stars.right != $MANAGER_DATA.stars.left ? 'WINNER' : '???'}
 	</p>
 </div>

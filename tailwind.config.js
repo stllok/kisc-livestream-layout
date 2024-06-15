@@ -20,7 +20,9 @@ export default {
 				}
 			},
 			fontFamily: {
-				sourcehansan: ['SourceHanSans', 'sans']
+				sourcehansan: ['SourceHanSans', 'sans'],
+				misans: ['Misans', 'misans'],
+				bahnschrift: ['Bahnschrift', 'Adobe NotDef']
 			},
 			colors: {
 				NM: {

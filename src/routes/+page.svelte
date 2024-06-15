@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { MANAGER_DATA, MENU_DATA } from '$lib/state/gosu';
+	import { MANAGER_DATA } from '$lib/state/gosu';
 	import { dev } from '$app/environment';
 	import { cubicOut } from 'svelte/easing';
 	import { tweened } from 'svelte/motion';
@@ -7,9 +7,38 @@
 	import DifferenceBar from '$lib/DifferenceBar.svelte';
 	import MapInfo from '$lib/MapInfo.svelte';
 	import PointInfo from '$lib/PointInfo.svelte';
+	import { writable } from 'svelte/store';
+	import { CURRENT_SCENE_NAME, change_scenes } from '$lib/state/obs_ws';
 
-	$: ENABLE_CHAT = $MENU_DATA.isChatEnabled === 1;
 	let FORCE_ENABLE_CHAT = false;
+
+	const ENABLE_CHAT = writable(true);
+
+	let LAST_IPC_STATE = 1;
+	MANAGER_DATA.subscribe((data) => {
+		// TODO: also write winner condition
+
+		if (data.ipcState === 3) {
+			console.log('Trigger disable chat on playing state');
+			ENABLE_CHAT.set(false);
+		}
+
+		// After finish enable chat
+		if (LAST_IPC_STATE === 3 && data.ipcState === 4) {
+			console.log('Trigger Delay enable chat on result state');
+			setTimeout(() => {
+				ENABLE_CHAT.set(true);
+			}, 5000);
+		}
+
+		// Switch to mappool scene when state change from 4 to 1
+		if (LAST_IPC_STATE === 4 && data.ipcState === 1 && $CURRENT_SCENE_NAME === 'Gameplay') {
+			console.log('Trigger scene change on standby state');
+			change_scenes('Mappool');
+		}
+
+		LAST_IPC_STATE = data.ipcState;
+	});
 
 	const RED_SCORE = tweened(0, {
 		duration: 200,
@@ -54,16 +83,19 @@
 		<div class="h-[720px] w-[1920px] bg-green-500" />
 
 		<!-- Bottom screen -->
-		<div class="group relative grow" data-chaton={ENABLE_CHAT || FORCE_ENABLE_CHAT}>
+		<div class="group relative grow" data-chaton={$ENABLE_CHAT || FORCE_ENABLE_CHAT}>
 			<div
 				class="absolute top-0 w-full animate-fadein group-data-[chaton=true]:animate-fadeout group-data-[chaton=true]:opacity-0"
 			>
 				<DifferenceBar />
 			</div>
 			<p
-				class="absolute left-5 top-5 animate-fadein text-7xl font-bold text-red-400 group-data-[chaton=true]:animate-fadeout group-data-[chaton=true]:opacity-0"
+				class="absolute bottom-5 left-5 animate-fadein font-bahnschrift text-7xl font-bold text-red-400 group-data-[chaton=true]:animate-fadeout group-data-[chaton=true]:opacity-0"
 			>
-				{$RED_SCORE.toFixed(0)}
+				{$RED_SCORE
+					.toFixed(0)
+					.toString()
+					.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
 			</p>
 			<div
 				class="absolute bottom-2 left-1/2 -translate-x-1/2 transition-all duration-1000 group-data-[chaton=true]:bottom-1/2 group-data-[chaton=true]:left-1/4 group-data-[chaton=true]:translate-y-1/2"
@@ -71,9 +103,12 @@
 				<MapInfo />
 			</div>
 			<p
-				class="absolute right-5 top-5 animate-fadein text-7xl font-bold text-blue-500 group-data-[chaton=true]:animate-fadeout group-data-[chaton=true]:opacity-0"
+				class="absolute bottom-5 right-5 animate-fadein font-bahnschrift text-7xl font-bold text-blue-500 group-data-[chaton=true]:animate-fadeout group-data-[chaton=true]:opacity-0"
 			>
-				{$BLUE_SCORE.toFixed(0)}
+				{$BLUE_SCORE
+					.toFixed(0)
+					.toString()
+					.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
 			</p>
 			<div
 				class="absolute right-2 top-0 h-full w-5/12 py-2 transition-all duration-1000 group-data-[chaton=false]:top-96"

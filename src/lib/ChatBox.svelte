@@ -27,7 +27,7 @@
 		</Chat>
 	{:else}
 		<Chat time={'7:27'} name={'YOU'} team={0}>YOU SHOULD CALL REF TO !mp addref [IGN] NOW!!!</Chat>
-		<Chat time={'7:27'} name={$MANAGER_DATA.teamName.left} team={1}>TEST TEAM RED COLOUR</Chat>
-		<Chat time={'7:27'} name={$MANAGER_DATA.teamName.right} team={2}>TEST TEAM BLUE COLOUR</Chat>
+		<Chat time={'7:27'} name={'TEAM RED'} team={1}>TEST TEAM RED COLOUR</Chat>
+		<Chat time={'7:27'} name={'TEAM BLUE'} team={2}>TEST TEAM BLUE COLOUR</Chat>
 	{/each}
 </div>

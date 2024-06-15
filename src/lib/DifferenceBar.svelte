@@ -5,13 +5,13 @@
 
 	$: is_tie = $MANAGER_DATA.gameplay.score.left == $MANAGER_DATA.gameplay.score.right;
 	$: is_red_win = $MANAGER_DATA.gameplay.score.left > $MANAGER_DATA.gameplay.score.right;
-
-	const DIFF = tweened(0, {
+	$: DIFFS = Math.abs($MANAGER_DATA.gameplay.score.left - $MANAGER_DATA.gameplay.score.right);
+	const DIFF_SMOOTH = tweened(0, {
 		duration: 200,
 		easing: cubicOut
 	});
 
-	$: DIFF.set(Math.abs($MANAGER_DATA.gameplay.score.left - $MANAGER_DATA.gameplay.score.right));
+	$: DIFF_SMOOTH.set(DIFFS);
 </script>
 
 <!-- Color Bar -->
@@ -45,12 +45,15 @@
 				100}%"
 	/>
 	<p
-		class="text-5xl font-bold"
+		class="font-bahnschrift text-5xl font-bold"
 		class:text-TEAMRED={is_red_win && !is_tie}
 		class:text-TEAMBLUE={!is_red_win && !is_tie}
 		class:text-black={is_tie}
 	>
-		{$DIFF.toFixed(0)}
+		{$DIFF_SMOOTH
+			.toFixed(0)
+			.toString()
+			.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
 	</p>
 	<div
 		class="h-full"
