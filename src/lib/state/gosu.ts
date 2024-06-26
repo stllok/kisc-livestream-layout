@@ -1,5 +1,47 @@
 import { writable, type Writable } from 'svelte/store';
 
+export interface IPCClient {
+	team: string;
+	spectating: {
+		name: string;
+		country: string;
+		userID: number;
+		accuracy: number;
+		rankedScore: number;
+		playCount: number;
+		globalRank: number;
+		totalPP: number;
+	};
+	gameplay: {
+		gameMode: number;
+		score: number;
+		name: string;
+		accuracy: number;
+		hits: {
+			0: number;
+			50: number;
+			100: number;
+			300: number;
+			geki: number;
+			katu: number;
+			sliderBreaks: number;
+			unstableRate: number;
+		};
+		combo: {
+			current: number;
+			max: number;
+		};
+		mods: {
+			num: number;
+			str: string;
+		};
+		hp: {
+			normal: number;
+			smooth: number;
+		}
+	}
+}
+
 export interface ChatType {
 	team: string;
 	time: string;
@@ -17,6 +59,10 @@ export interface TourneyManager {
 	stars: {
 		left: number;
 		right: number;
+	};
+	bools: {
+		scoreVisible: boolean;
+		starsVisible: boolean;
 	};
 	chat: ChatType[] | null;
 	gameplay: {
@@ -86,6 +132,10 @@ const MANAGER_DATA: Writable<TourneyManager> = writable({
 		left: 0,
 		right: 0
 	},
+	bools: {
+		scoreVisible: false,
+		starsVisible: true
+	},
 	chat: null,
 	gameplay: {
 		score: {
@@ -143,6 +193,10 @@ const BEATMAP_METADATA: Writable<BeatmapMetadata> = writable({
 	}
 });
 
+const IPC_CLIENT: Writable<IPCClient[]> = writable([]);
+const WEIGHTED_TEAMRED_SCORE = writable(0);
+const WEIGHTED_TEAMBLUE_SCORE = writable(0);
+
 const GOSUMEMORY_ADDRESS = '127.0.0.1:24050';
 const GOSU_WS = new WebSocket(`ws://${GOSUMEMORY_ADDRESS}/ws`);
 GOSU_WS.addEventListener('message', (event) => {
@@ -151,6 +205,20 @@ GOSU_WS.addEventListener('message', (event) => {
 	MANAGER_DATA.set(raw_data['tourney']['manager']);
 	MENU_DATA.set(raw_data['menu']);
 	BEATMAP_METADATA.set(raw_data['menu']['bm']);
+	IPC_CLIENT.set(raw_data['tourney']['ipcClients']);
 });
 
-export { GOSUMEMORY_ADDRESS, MANAGER_DATA, MENU_DATA, BEATMAP_METADATA };
+
+IPC_CLIENT.subscribe((data) => {
+	let [red, blue] = data.reduce((sum, current) => {
+		sum[current.team === "left" ? 0 : 1] += current.gameplay.mods.str.includes("EZ") ? current.gameplay.score * 1.75 : current.gameplay.score;
+		return sum;
+	}, [0, 0]);
+
+	WEIGHTED_TEAMRED_SCORE.set(red);
+	WEIGHTED_TEAMBLUE_SCORE.set(blue);
+
+})
+
+
+export { GOSUMEMORY_ADDRESS, MANAGER_DATA, MENU_DATA, BEATMAP_METADATA, WEIGHTED_TEAMBLUE_SCORE, WEIGHTED_TEAMRED_SCORE, IPC_CLIENT };

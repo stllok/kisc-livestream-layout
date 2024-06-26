@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { MANAGER_DATA } from '$lib/state/gosu';
+	import {  WEIGHTED_TEAMBLUE_SCORE, WEIGHTED_TEAMRED_SCORE } from '$lib/state/gosu';
 	import { cubicOut } from 'svelte/easing';
 	import { tweened } from 'svelte/motion';
 
-	$: is_tie = $MANAGER_DATA.gameplay.score.left == $MANAGER_DATA.gameplay.score.right;
-	$: is_red_win = $MANAGER_DATA.gameplay.score.left > $MANAGER_DATA.gameplay.score.right;
-	$: DIFFS = Math.abs($MANAGER_DATA.gameplay.score.left - $MANAGER_DATA.gameplay.score.right);
+	$: is_tie = $WEIGHTED_TEAMRED_SCORE == $WEIGHTED_TEAMBLUE_SCORE;
+	$: is_red_win = $WEIGHTED_TEAMRED_SCORE > $WEIGHTED_TEAMBLUE_SCORE;
+	$: DIFFS = Math.abs($WEIGHTED_TEAMRED_SCORE - $WEIGHTED_TEAMBLUE_SCORE);
 	const DIFF_SMOOTH = tweened(0, {
 		duration: 200,
 		easing: cubicOut
@@ -20,16 +20,16 @@
 		class="h-full bg-TEAMRED"
 		style:width="{is_tie
 			? 50
-			: ($MANAGER_DATA.gameplay.score.left /
-					($MANAGER_DATA.gameplay.score.left + $MANAGER_DATA.gameplay.score.right)) *
+			: ($WEIGHTED_TEAMRED_SCORE /
+					($WEIGHTED_TEAMRED_SCORE + $WEIGHTED_TEAMBLUE_SCORE)) *
 				100}%"
 	/>
 	<div
 		class="h-full bg-TEAMBLUE"
 		style:width="{is_tie
 			? 50
-			: ($MANAGER_DATA.gameplay.score.right /
-					($MANAGER_DATA.gameplay.score.left + $MANAGER_DATA.gameplay.score.right)) *
+			: ($WEIGHTED_TEAMBLUE_SCORE /
+					($WEIGHTED_TEAMRED_SCORE + $WEIGHTED_TEAMBLUE_SCORE)) *
 				100}%"
 	/>
 </div>
@@ -40,8 +40,8 @@
 		class="h-full"
 		style:width="{is_tie
 			? 50
-			: ($MANAGER_DATA.gameplay.score.left /
-					($MANAGER_DATA.gameplay.score.left + $MANAGER_DATA.gameplay.score.right)) *
+			: ($WEIGHTED_TEAMRED_SCORE /
+					($WEIGHTED_TEAMRED_SCORE + $WEIGHTED_TEAMBLUE_SCORE)) *
 				100}%"
 	/>
 	<p
@@ -59,8 +59,8 @@
 		class="h-full"
 		style:width="{is_tie
 			? 50
-			: ($MANAGER_DATA.gameplay.score.right /
-					($MANAGER_DATA.gameplay.score.left + $MANAGER_DATA.gameplay.score.right)) *
+			: ($WEIGHTED_TEAMBLUE_SCORE /
+					($WEIGHTED_TEAMRED_SCORE + $WEIGHTED_TEAMBLUE_SCORE)) *
 				100}%"
 	/>
 </div>

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
+	import { MANAGER_DATA } from './state/gosu';
 
 	export let teamname: string;
 	export let target_point: number;
@@ -18,7 +19,8 @@
 		<p class="font-misans text-5xl font-extrabold text-TEAMRED group-last:text-TEAMBLUE">
 			{teamname}
 		</p>
-		<div class="flex gap-1 duration-100 group-last:flex-row-reverse">
+		{#if $MANAGER_DATA.bools.starsVisible}
+		<div class="flex gap-1 duration-100 group-last:flex-row-reverse" transition:fade>
 			{#each Array(target_point).keys() as i}
 				{#if i < current_point}
 					<enhanced:img
@@ -39,5 +41,6 @@
 				{/if}
 			{/each}
 		</div>
+		{/if}
 	</div>
 </div>

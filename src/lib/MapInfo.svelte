@@ -10,6 +10,7 @@
 		['', `[${$BEATMAP_METADATA.metadata.difficulty}]`]
 	];
 
+
 	$: FOURTH_LINE = [
 		['CS', `${$BEATMAP_METADATA.stats.memoryCS}`],
 		['AR', `${$BEATMAP_METADATA.stats.memoryAR}`],

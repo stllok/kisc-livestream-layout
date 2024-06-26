@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { MANAGER_DATA } from '$lib/state/gosu';
+	import { MANAGER_DATA, WEIGHTED_TEAMBLUE_SCORE, WEIGHTED_TEAMRED_SCORE } from '$lib/state/gosu';
 	import { dev } from '$app/environment';
 	import { cubicOut } from 'svelte/easing';
 	import { tweened } from 'svelte/motion';
@@ -12,24 +12,10 @@
 
 	let FORCE_ENABLE_CHAT = false;
 
-	const ENABLE_CHAT = writable(true);
 
 	let LAST_IPC_STATE = 1;
 	MANAGER_DATA.subscribe((data) => {
 		// TODO: also write winner condition
-
-		if (data.ipcState === 3) {
-			console.log('Trigger disable chat on playing state');
-			ENABLE_CHAT.set(false);
-		}
-
-		// After finish enable chat
-		if (LAST_IPC_STATE === 3 && data.ipcState === 4) {
-			console.log('Trigger Delay enable chat on result state');
-			setTimeout(() => {
-				ENABLE_CHAT.set(true);
-			}, 5000);
-		}
 
 		// Switch to mappool scene when state change from 4 to 1
 		if (LAST_IPC_STATE === 4 && data.ipcState === 1 && $CURRENT_SCENE_NAME === 'Gameplay') {
@@ -50,8 +36,8 @@
 		easing: cubicOut
 	});
 
-	$: RED_SCORE.set($MANAGER_DATA.gameplay.score.left);
-	$: BLUE_SCORE.set($MANAGER_DATA.gameplay.score.right);
+	$: RED_SCORE.set($WEIGHTED_TEAMRED_SCORE);
+	$: BLUE_SCORE.set($WEIGHTED_TEAMBLUE_SCORE);
 </script>
 
 <!-- FOR DEVELOP ONLY EVENT -->
@@ -83,7 +69,7 @@
 		<div class="h-[720px] w-[1920px] bg-green-500" />
 
 		<!-- Bottom screen -->
-		<div class="group relative grow" data-chaton={$ENABLE_CHAT || FORCE_ENABLE_CHAT}>
+		<div class="group relative grow" data-chaton={!$MANAGER_DATA.bools.scoreVisible || FORCE_ENABLE_CHAT}>
 			<div
 				class="absolute top-0 w-full animate-fadein group-data-[chaton=true]:animate-fadeout group-data-[chaton=true]:opacity-0"
 			>
