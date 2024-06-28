@@ -41,6 +41,8 @@
 				{/if}
 			{/each}
 		</div>
+		{:else}
+		<p class="text-3xl font-semibold font-misans">WARM-UP...</p>
 		{/if}
 	</div>
 </div>

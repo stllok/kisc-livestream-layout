@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { BEATMAP_METADATA, MANAGER_DATA } from '$lib/state/gosu';
 	import { fade, fly } from 'svelte/transition';
-	import type { MapPoolMetadata } from '../+layout';
 	import { bounceOut, quintOut } from 'svelte/easing';
-	import { CURRENT_SCENE_NAME, change_scenes } from '$lib/state/obs_ws';
+	import { CURRENT_SCENE_NAME, broadcase_team_picking, change_scenes } from '$lib/state/obs_ws';
+	import type { MapPoolMetadata } from '$lib/state/mappool';
 
 	// map metadata
 	export let mod: string;
@@ -38,6 +38,25 @@
 			}, 15000);
 		});
 	}
+	async function on_set_auto() {
+		if (RESULT !== null || is_ban) {
+			return;
+		}
+
+		RESULT =  [is_ban, is_team_red];
+		await broadcase_team_picking(is_team_red);
+
+		// Auto switch back to Gameplay if it's pick
+		new Promise((resolve) => {
+			setTimeout(() => {
+				if ($CURRENT_SCENE_NAME === 'Mappool') {
+					change_scenes('Gameplay');
+				}
+				resolve(undefined);
+			}, 15000);
+		});
+		is_team_red = !is_team_red;
+	}
 
 	function on_unset() {
 		RESULT = null;
@@ -49,13 +68,13 @@
 		PICK_EFFECT = false;
 	}
 
-	$: if ($BEATMAP_METADATA.set === map.mapset_id && !is_ban) {
-		on_set();
+	$: if ($BEATMAP_METADATA.id === map.beatmap_id && !is_ban) {
+		on_set_auto();
 	}
 </script>
 
 <button
-	class="relative m-2 h-12 w-[36rem] rounded-2xl *:rounded-2xl *:duration-200"
+	class="relative m-2 h-14 w-[36rem] rounded-2xl *:rounded-2xl *:duration-200"
 	on:click={on_set}
 	on:contextmenu|preventDefault={on_unset}
 >
@@ -90,7 +109,7 @@
 	{/if}
 	<!-- Background -->
 	<div
-		style:background-image={`url('https://assets.ppy.sh/beatmaps/${map.mapset_id}/covers/cover@2x.jpg')`}
+		style:background-image={`url('https://assets.ppy.sh/beatmaps/${map.beatmapset_id}/covers/cover@2x.jpg')`}
 		style:box-shadow={'4px 4px 21px rgba(0,0,0,0.58)'}
 		class="absolute top-0 -z-10 h-full w-[34.5rem] bg-cover bg-local bg-center bg-origin-padding brightness-[.8]"
 	/>
@@ -102,26 +121,26 @@
 				class="text-[1.5vh] font-semibold text-white drop-shadow-xl"
 				style:text-shadow={'4px 4px 8px black'}
 			>
-				{map.Title}
+				{map.title}
 			</p>
 			<!-- Map Metadata -->
 			<div class="flex justify-between *:text-[1vh]">
 				<div class="inline-flex *:text-white">
 					<p class="" style:text-shadow={'4px 4px 8px black'}>Artist:</p>
 					<p class="font-extrabold" style:text-shadow={'4px 4px 8px black'}>
-						{map.Artist}
+						{map.artist}
 					</p>
 				</div>
 				<div class="inline-flex *:text-white">
 					<p class="" style:text-shadow={'4px 4px 8px black'}>Mapper:</p>
 					<p class="font-extrabold" style:text-shadow={'4px 4px 8px black'}>
-						{map.Mapper}
+						{map.mapper}
 					</p>
 				</div>
 				<div class="inline-flex *:text-white">
 					<p class="" style:text-shadow={'4px 4px 8px black'}>Difficulty:</p>
 					<p class="font-extrabold" style:text-shadow={'4px 4px 8px black'}>
-						{map.Difficulty}
+						{map.difficulty}
 					</p>
 				</div>
 			</div>

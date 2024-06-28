@@ -1,15 +1,9 @@
 <script lang="ts">
-	import { dev } from '$app/environment';
 	import { MANAGER_DATA } from '$lib/state/gosu';
-	import type { MapPools } from '../+layout';
 	import PointLayout from '$lib/PointLayout.svelte';
 	import Map from './Map.svelte';
+	import { MAPPOOL } from '$lib/state/mappool';
 
-	function get_mappool_link(stage: string): string {
-		return dev ? '/bracket/sample_mappool.json' : `/bracket/${stage}.json`;
-	}
-
-	let MAPPOOL_REQ: Promise<MapPools> = fetch(get_mappool_link('F')).then((_) => _.json());
 
 	let IS_BAN = true;
 	let IS_TEAMRED = true;
@@ -20,15 +14,13 @@
 		<PointLayout />
 		<!-- Map grid -->
 		<div class="mt-4 flex flex-col gap-y-4">
-			{#await MAPPOOL_REQ then mappool}
-				{#each Object.entries(mappool) as [mod, maps]}
+				{#each Object.entries(MAPPOOL) as [mod, maps]}
 					<div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-4">
 						{#each maps as map, i}
 							<Map {mod} idx={i + 1} {map} bind:is_ban={IS_BAN} bind:is_team_red={IS_TEAMRED} />
 						{/each}
 					</div>
 				{/each}
-			{/await}
 		</div>
 	</div>
 	<!-- Control panel -->
