@@ -38,8 +38,8 @@ export interface IPCClient {
 		hp: {
 			normal: number;
 			smooth: number;
-		}
-	}
+		};
+	};
 }
 
 export interface ChatType {
@@ -208,17 +208,27 @@ GOSU_WS.addEventListener('message', (event) => {
 	IPC_CLIENT.set(raw_data['tourney']['ipcClients']);
 });
 
-
 IPC_CLIENT.subscribe((data) => {
-	let [red, blue] = data.reduce((sum, current) => {
-		sum[current.team === "left" ? 0 : 1] += current.gameplay.mods.str.includes("EZ") ? current.gameplay.score * 1.75 : current.gameplay.score;
-		return sum;
-	}, [0, 0]);
+	let [red, blue] = data.reduce(
+		(sum, current) => {
+			sum[current.team === 'left' ? 0 : 1] += current.gameplay.mods.str.includes('EZ')
+				? current.gameplay.score * 1.75
+				: current.gameplay.score;
+			return sum;
+		},
+		[0, 0]
+	);
 
 	WEIGHTED_TEAMRED_SCORE.set(red);
 	WEIGHTED_TEAMBLUE_SCORE.set(blue);
+});
 
-})
-
-
-export { GOSUMEMORY_ADDRESS, MANAGER_DATA, MENU_DATA, BEATMAP_METADATA, WEIGHTED_TEAMBLUE_SCORE, WEIGHTED_TEAMRED_SCORE, IPC_CLIENT };
+export {
+	GOSUMEMORY_ADDRESS,
+	MANAGER_DATA,
+	MENU_DATA,
+	BEATMAP_METADATA,
+	WEIGHTED_TEAMBLUE_SCORE,
+	WEIGHTED_TEAMRED_SCORE,
+	IPC_CLIENT
+};

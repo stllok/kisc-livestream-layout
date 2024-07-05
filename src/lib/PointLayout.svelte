@@ -3,7 +3,7 @@
 	import PointInfo from './PointInfo.svelte';
 </script>
 
-<div class="flex h-[120px] justify-between p-3">
+<div class="flex h-[130px] justify-between">
 	<PointInfo
 		teamname={$MANAGER_DATA.teamName.left}
 		target_point={Math.ceil($MANAGER_DATA.bestOF / 2)}

@@ -3,7 +3,7 @@
 	import PointLayout from '$lib/PointLayout.svelte';
 	import Map from './Map.svelte';
 	import { MAPPOOL } from '$lib/state/mappool';
-
+	import ChatBox from '$lib/ChatBox.svelte';
 
 	let IS_BAN = true;
 	let IS_TEAMRED = true;
@@ -13,15 +13,17 @@
 	<div>
 		<PointLayout />
 		<!-- Map grid -->
-		<div class="mt-4 flex flex-col gap-y-4">
-				{#each Object.entries(MAPPOOL) as [mod, maps]}
+		{#await MAPPOOL then mappool}
+			<div class="flex flex-col gap-y-4">
+				{#each Object.entries(mappool) as [mod, maps]}
 					<div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-4">
 						{#each maps as map, i}
 							<Map {mod} idx={i + 1} {map} bind:is_ban={IS_BAN} bind:is_team_red={IS_TEAMRED} />
 						{/each}
 					</div>
 				{/each}
-		</div>
+			</div>
+		{/await}
 	</div>
 	<!-- Control panel -->
 	<div class="flex h-[120px] gap-2 bg-gray-400 p-2">

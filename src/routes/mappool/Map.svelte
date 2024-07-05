@@ -43,7 +43,7 @@
 			return;
 		}
 
-		RESULT =  [is_ban, is_team_red];
+		RESULT = [is_ban, is_team_red];
 		await broadcase_team_picking(is_team_red);
 
 		// Auto switch back to Gameplay if it's pick

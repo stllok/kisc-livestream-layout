@@ -6,12 +6,10 @@
 	import ChatBox from '$lib/ChatBox.svelte';
 	import DifferenceBar from '$lib/DifferenceBar.svelte';
 	import MapInfo from '$lib/MapInfo.svelte';
-	import PointInfo from '$lib/PointInfo.svelte';
-	import { writable } from 'svelte/store';
 	import { CURRENT_SCENE_NAME, change_scenes } from '$lib/state/obs_ws';
+	import PointLayout from '$lib/PointLayout.svelte';
 
 	let FORCE_ENABLE_CHAT = false;
-
 
 	let LAST_IPC_STATE = 1;
 	MANAGER_DATA.subscribe((data) => {
@@ -52,24 +50,16 @@
 <div class="flex h-screen w-screen flex-col justify-between">
 	<div class="flex grow flex-col">
 		<!-- Upper screen -->
-		<div class="flex h-[130px] justify-between">
-			<PointInfo
-				teamname={$MANAGER_DATA.teamName.left}
-				target_point={Math.ceil($MANAGER_DATA.bestOF / 2)}
-				current_point={$MANAGER_DATA.stars.left}
-			/>
-			<PointInfo
-				teamname={$MANAGER_DATA.teamName.right}
-				target_point={Math.ceil($MANAGER_DATA.bestOF / 2)}
-				current_point={$MANAGER_DATA.stars.right}
-			/>
-		</div>
+		<PointLayout />
 
 		<!-- Green screen -->
 		<div class="h-[720px] w-[1920px] bg-green-500" />
 
 		<!-- Bottom screen -->
-		<div class="group relative grow" data-chaton={!$MANAGER_DATA.bools.scoreVisible || FORCE_ENABLE_CHAT}>
+		<div
+			class="group relative grow"
+			data-chaton={!$MANAGER_DATA.bools.scoreVisible || FORCE_ENABLE_CHAT}
+		>
 			<div
 				class="absolute top-0 w-full animate-fadein group-data-[chaton=true]:animate-fadeout group-data-[chaton=true]:opacity-0"
 			>

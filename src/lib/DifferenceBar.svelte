@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {  WEIGHTED_TEAMBLUE_SCORE, WEIGHTED_TEAMRED_SCORE } from '$lib/state/gosu';
+	import { WEIGHTED_TEAMBLUE_SCORE, WEIGHTED_TEAMRED_SCORE } from '$lib/state/gosu';
 	import { cubicOut } from 'svelte/easing';
 	import { tweened } from 'svelte/motion';
 
@@ -20,17 +20,13 @@
 		class="h-full bg-TEAMRED"
 		style:width="{is_tie
 			? 50
-			: ($WEIGHTED_TEAMRED_SCORE /
-					($WEIGHTED_TEAMRED_SCORE + $WEIGHTED_TEAMBLUE_SCORE)) *
-				100}%"
+			: ($WEIGHTED_TEAMRED_SCORE / ($WEIGHTED_TEAMRED_SCORE + $WEIGHTED_TEAMBLUE_SCORE)) * 100}%"
 	/>
 	<div
 		class="h-full bg-TEAMBLUE"
 		style:width="{is_tie
 			? 50
-			: ($WEIGHTED_TEAMBLUE_SCORE /
-					($WEIGHTED_TEAMRED_SCORE + $WEIGHTED_TEAMBLUE_SCORE)) *
-				100}%"
+			: ($WEIGHTED_TEAMBLUE_SCORE / ($WEIGHTED_TEAMRED_SCORE + $WEIGHTED_TEAMBLUE_SCORE)) * 100}%"
 	/>
 </div>
 
@@ -40,9 +36,7 @@
 		class="h-full"
 		style:width="{is_tie
 			? 50
-			: ($WEIGHTED_TEAMRED_SCORE /
-					($WEIGHTED_TEAMRED_SCORE + $WEIGHTED_TEAMBLUE_SCORE)) *
-				100}%"
+			: ($WEIGHTED_TEAMRED_SCORE / ($WEIGHTED_TEAMRED_SCORE + $WEIGHTED_TEAMBLUE_SCORE)) * 100}%"
 	/>
 	<p
 		class="font-bahnschrift text-5xl font-bold"
@@ -59,8 +53,6 @@
 		class="h-full"
 		style:width="{is_tie
 			? 50
-			: ($WEIGHTED_TEAMBLUE_SCORE /
-					($WEIGHTED_TEAMRED_SCORE + $WEIGHTED_TEAMBLUE_SCORE)) *
-				100}%"
+			: ($WEIGHTED_TEAMBLUE_SCORE / ($WEIGHTED_TEAMRED_SCORE + $WEIGHTED_TEAMBLUE_SCORE)) * 100}%"
 	/>
 </div>

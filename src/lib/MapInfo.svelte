@@ -1,11 +1,17 @@
 <script lang="ts">
 	import { BEATMAP_METADATA, GOSUMEMORY_ADDRESS } from '$lib/state/gosu';
+	import { onMount } from 'svelte';
 	import { MAPPOOL, type MapPoolMetadata } from './state/mappool';
 	import { IS_TEAM_RED_PICKING } from './state/obs_ws';
 
 	let CURRENT_MAP_ID = 0;
 
 	let MAP: MapPoolMetadata | null = null;
+
+	let mappool;
+	onMount(async () => {
+		mappool = await MAPPOOL;
+	});
 
 	BEATMAP_METADATA.subscribe((bm) => {
 		if (bm.id !== CURRENT_MAP_ID) {
@@ -44,8 +50,8 @@
 	class="flex h-36 w-full gap-2 self-center duration-1000 *:h-36 *:text-[#7e7295] first:pb-2 [&:nth-child(2)]:justify-center"
 >
 	<img
-		class="w-64 rounded-3xl border-4 data-[team=none]:border-[#7e22ce] data-[team=red]:border-TEAMRED_BORDER data-[team=blue]:border-TEAMBLUE_BORDER object-cover"
-		data-team={MAP === null ? "none" : ($IS_TEAM_RED_PICKING ? "red" : "blue")}
+		class="w-64 rounded-3xl border-4 object-cover data-[team=blue]:border-TEAMBLUE_BORDER data-[team=none]:border-[#7e22ce] data-[team=red]:border-TEAMRED_BORDER"
+		data-team={MAP === null ? 'none' : $IS_TEAM_RED_PICKING ? 'red' : 'blue'}
 		src={`http://${GOSUMEMORY_ADDRESS}/Songs/${$BEATMAP_METADATA.path.full}`}
 		alt="BG"
 	/>

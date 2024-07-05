@@ -1,5 +1,5 @@
 export interface MapPools {
-	string: MapPoolMetadata[];
+	[key: string]: MapPoolMetadata[];
 }
 
 export interface MapPoolMetadata {
@@ -18,5 +18,6 @@ export interface MapPoolMetadata {
 	beatmapset_id: number;
 }
 
-
-export const MAPPOOL: MapPools = await fetch(`/current_stage.json`).then((_) => _.json());
+export const MAPPOOL: Promise<MapPools> = fetch(`/kisc_static/current_stage.json`).then((_) =>
+	_.json()
+);

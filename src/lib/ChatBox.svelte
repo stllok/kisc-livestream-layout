@@ -2,6 +2,7 @@
 	import autoAnimate from '@formkit/auto-animate';
 	import { MANAGER_DATA } from '$lib/state/gosu';
 	import Chat from './Chat.svelte';
+	import { TEAM_DATA } from '$lib';
 
 	let LIST_DOM: HTMLElement;
 
@@ -10,16 +11,27 @@
 			LIST_DOM.scroll({ top: LIST_DOM.scrollHeight, behavior: 'smooth' });
 		}
 	});
+
+	function get_team_color(name: string) {
+		const [left, right] = [
+			TEAM_DATA[$MANAGER_DATA.teamName.left] ?? [],
+			TEAM_DATA[$MANAGER_DATA.teamName.right] ?? []
+		];
+
+		if (left.findIndex((o) => name === o) !== -1) {
+			return 1;
+		}
+		if (right.findIndex((o) => name === o) !== -1) {
+			return 2;
+		}
+		return 0;
+	}
 </script>
 
 <div class="flex h-full w-full flex-col rounded-3xl bg-[#6c5d56] p-3">
-	<div class="flex  flex-col h-full w-full overflow-hidden" bind:this={LIST_DOM} use:autoAnimate>
+	<div class="flex h-full w-full flex-col overflow-hidden" bind:this={LIST_DOM} use:autoAnimate>
 		{#each $MANAGER_DATA.chat ?? [] as chat}
-			<Chat
-				time={chat.time}
-				name={chat.name}
-				team={chat.team === 'left' ? 1 : chat.team === 'right' ? 2 : 0}
-			>
+			<Chat time={chat.time} name={chat.name} team={get_team_color(chat.name)}>
 				{chat.messageBody}
 			</Chat>
 		{:else}
