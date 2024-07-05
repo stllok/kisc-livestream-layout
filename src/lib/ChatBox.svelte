@@ -18,10 +18,10 @@
 			TEAM_DATA[$MANAGER_DATA.teamName.right] ?? []
 		];
 
-		if (left.findIndex((o) => name === o) !== -1) {
+		if (left.findIndex((o) => name === o.name) !== -1) {
 			return 1;
 		}
-		if (right.findIndex((o) => name === o) !== -1) {
+		if (right.findIndex((o) => name === o.name) !== -1) {
 			return 2;
 		}
 		return 0;

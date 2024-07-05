@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { MANAGER_DATA } from './state/gosu';
-	import { TEAM_DATA } from '$lib';
 
 	export let teamname: string;
 	export let target_point: number;
@@ -10,7 +9,7 @@
 
 <div class="group flex gap-2 px-2 py-2 last:flex-row-reverse">
 	<img
-		src="/team/{teamname}"
+		src="/kisc_static/team/{teamname}"
 		alt="ICON"
 		class="h-28 w-28 rounded-xl"
 		on:error={(o) => {
