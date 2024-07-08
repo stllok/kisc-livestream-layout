@@ -17,4 +17,11 @@
 		font-display: swap;
 		src: url('/font/MiSans-Bold.otf');
 	}
+	@font-face {
+		font-family: 'XinYuGongPinBoTi';
+		font-style: normal;
+		font-weight: 400;
+		font-display: swap;
+		src: url('/font/XinYuGongPinBoTi.ttf');
+	}
 }

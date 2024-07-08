@@ -123,14 +123,14 @@ export interface BeatmapMetadata {
 
 const MANAGER_DATA: Writable<TourneyManager> = writable({
 	ipcState: 3,
-	bestOF: 1,
+	bestOF: 17,
 	teamName: {
 		left: '红队',
 		right: 'TEAM BLUE'
 	},
 	stars: {
-		left: 0,
-		right: 0
+		left: 1,
+		right: 1
 	},
 	bools: {
 		scoreVisible: false,

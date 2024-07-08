@@ -9,8 +9,6 @@
 	import { CURRENT_SCENE_NAME, change_scenes } from '$lib/state/obs_ws';
 	import PointLayout from '$lib/PointLayout.svelte';
 
-	let FORCE_ENABLE_CHAT = false;
-
 	let LAST_IPC_STATE = 1;
 	MANAGER_DATA.subscribe((data) => {
 		// TODO: also write winner condition
@@ -41,9 +39,18 @@
 <!-- FOR DEVELOP ONLY EVENT -->
 <svelte:window
 	on:keydown={(e) => {
-		if (dev && e.key === 't') {
-			FORCE_ENABLE_CHAT = !FORCE_ENABLE_CHAT;
-			console.log('?', FORCE_ENABLE_CHAT);
+		if (!dev) {
+			return;
+		}
+		if (e.key === 't') {
+			$MANAGER_DATA.bools.scoreVisible = $MANAGER_DATA.bools.scoreVisible === 0 ? 1 : 0;
+			console.log('?', $MANAGER_DATA.bools.scoreVisible);
+		}
+		if (e.key === '[') {
+			$MANAGER_DATA.stars.left += 1;
+		}
+		if (e.key === ']') {
+			$MANAGER_DATA.stars.right += 1;
 		}
 	}}
 />
@@ -56,10 +63,7 @@
 		<div class="h-[720px] w-[1920px] bg-green-500" />
 
 		<!-- Bottom screen -->
-		<div
-			class="group relative grow"
-			data-chaton={!$MANAGER_DATA.bools.scoreVisible || FORCE_ENABLE_CHAT}
-		>
+		<div class="group relative grow" data-chaton={!$MANAGER_DATA.bools.scoreVisible}>
 			<div
 				class="absolute top-0 w-full animate-fadein group-data-[chaton=true]:animate-fadeout group-data-[chaton=true]:opacity-0"
 			>

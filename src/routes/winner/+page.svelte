@@ -4,23 +4,26 @@
 	import TierSlot from './TierSlot.svelte';
 
 	$: IS_LEFT_WIN = $MANAGER_DATA.stars.left > $MANAGER_DATA.stars.right;
+	// $: IS_LEFT_WIN = true;
 	$: TEAMNAME = IS_LEFT_WIN ? $MANAGER_DATA.teamName.left : $MANAGER_DATA.teamName.right;
 	$: PLAYERS = TEAM_DATA[TEAMNAME] ?? [];
 </script>
 
 <div
-	class="group fixed top-1/2 h-96 w-full -translate-y-1/2 data-[left-win=false]:bg-blue-300 data-[left-win=true]:bg-red-300"
-	data-left-win={IS_LEFT_WIN}
+	class="group/main flex h-screen w-screen flex-col items-center justify-center gap-8"
+	data-is-red-win={IS_LEFT_WIN}
 >
-	<!-- Team info -->
-	<div
-		class="absolute -top-16 left-8 flex h-[32rem] w-96 grow flex-col justify-between group-data-[left-win=false]:bg-TEAMBLUE group-data-[left-win=true]:bg-TEAMRED"
+	<p
+		class="font-xinyugongpinboi text-9xl group-data-[is-red-win=false]/main:text-[#2b4390] group-data-[is-red-win=true]/main:text-[#902b2b]"
 	>
-		<img src="/kisc_static/team/{TEAMNAME}" alt="ICON" class="h-auto w-full" />
-		<p class="grow text-center font-misans text-4xl">{TEAMNAME}</p>
-	</div>
-	<!-- player list -->
-	<div class="absolute right-0 grid h-96 w-[94rem] grid-cols-2 grid-rows-2">
+		Winner
+	</p>
+	<p
+		class="font-xinyugongpinboi text-9xl group-data-[is-red-win=false]/main:text-[#2b4390] group-data-[is-red-win=true]/main:text-[#902b2b]"
+	>
+		Team Name
+	</p>
+	<div class="grid grid-cols-2 grid-rows-2 gap-4">
 		{#each Array(4) as _, i}
 			<TierSlot
 				players={[

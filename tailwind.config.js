@@ -22,7 +22,8 @@ export default {
 			fontFamily: {
 				sourcehansan: ['SourceHanSans', 'sans'],
 				misans: ['Misans', 'misans'],
-				bahnschrift: ['Bahnschrift', 'Adobe NotDef']
+				bahnschrift: ['Bahnschrift', 'Adobe NotDef'],
+				xinyugongpinboi: ['XinYuGongPinBoTi', 'xinyugongpinboi']
 			},
 			colors: {
 				NM: {
