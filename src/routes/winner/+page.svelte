@@ -21,7 +21,7 @@
 	<p
 		class="font-xinyugongpinboi text-9xl group-data-[is-red-win=false]/main:text-[#2b4390] group-data-[is-red-win=true]/main:text-[#902b2b]"
 	>
-		Team Name
+		{TEAMNAME}
 	</p>
 	<div class="grid grid-cols-2 grid-rows-2 gap-4">
 		{#each Array(4) as _, i}
