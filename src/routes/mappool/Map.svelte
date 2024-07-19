@@ -12,6 +12,7 @@
 	// status
 	export let is_ban: boolean;
 	export let is_team_red: boolean;
+	export let is_autopick_enabled: boolean;
 
 	let PICK_EFFECT = false;
 
@@ -23,23 +24,10 @@
 
 		RESULT = RESULT === null ? [is_ban, is_team_red] : RESULT;
 		is_team_red = !is_team_red;
-
-		if (is_ban) {
-			return;
-		}
-
-		// Auto switch back to Gameplay if it's pick
-		new Promise((resolve) => {
-			setTimeout(() => {
-				if ($CURRENT_SCENE_NAME === 'Mappool') {
-					change_scenes('Gameplay');
-				}
-				resolve(undefined);
-			}, 15000);
-		});
 	}
+
 	async function on_set_auto() {
-		if (RESULT !== null || is_ban) {
+		if ((RESULT !== null || is_ban) && !is_autopick_enabled) {
 			return;
 		}
 
@@ -98,13 +86,17 @@
 	{:else if RESULT !== null && !RESULT[0]}
 		<!-- On PICK Action -->
 		<p
-			class="absolute -bottom-5 -left-2 z-10 h-6 w-auto px-2 font-semibold text-white"
-			class:bg-TEAMRED={RESULT[1]}
-			class:bg-TEAMBLUE={!RESULT[1]}
+			class="absolute -bottom-5 -left-2 z-10 h-6 w-auto px-2 font-semibold text-white bg-TB"
+			class:!bg-TEAMRED={RESULT[1] && mod != "TB"}
+			class:!bg-TEAMBLUE={!RESULT[1] && mod != "TB"}
 			transition:fly={{ delay: 0, duration: 1000, x: 0, y: 100, opacity: 0.1, easing: quintOut }}
 			on:introend={trigger_pick_flashing}
 		>
+		{#if mod != "TB"}
 			{RESULT[1] ? $MANAGER_DATA.teamName.left : $MANAGER_DATA.teamName.right} pick
+			{:else}
+			TIEBREAKER!!!
+			{/if}
 		</p>
 	{/if}
 	<!-- Background -->

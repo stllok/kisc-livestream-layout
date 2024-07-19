@@ -3,10 +3,10 @@
 	import PointLayout from '$lib/PointLayout.svelte';
 	import Map from './Map.svelte';
 	import { MAPPOOL } from '$lib/state/mappool';
-	import ChatBox from '$lib/ChatBox.svelte';
 
 	let IS_BAN = true;
 	let IS_TEAMRED = true;
+	let IS_AUTOPICK_ENABLED = false;
 </script>
 
 <div class="flex h-screen flex-col justify-between">
@@ -18,7 +18,7 @@
 				{#each Object.entries(mappool) as [mod, maps]}
 					<div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-4">
 						{#each maps as map, i}
-							<Map {mod} idx={i + 1} {map} bind:is_ban={IS_BAN} bind:is_team_red={IS_TEAMRED} />
+							<Map {mod} idx={i + 1} {map} bind:is_ban={IS_BAN} bind:is_team_red={IS_TEAMRED} bind:is_autopick_enabled={IS_AUTOPICK_ENABLED} />
 						{/each}
 					</div>
 				{/each}
@@ -53,6 +53,9 @@
 				class="bg-blue-200 hover:bg-blue-400 active:bg-blue-600 disabled:bg-blue-500"
 				>{$MANAGER_DATA.teamName.right}</button
 			>
+		</div>
+		<div>
+			<button class="bg-gray-300 hover:bg-gray-100 active:bg-gray-500" on:click={() => IS_AUTOPICK_ENABLED = !IS_AUTOPICK_ENABLED}>Auto Pick Detection {IS_AUTOPICK_ENABLED ? "✔️": "❌"}</button>
 		</div>
 	</div>
 </div>

@@ -5,7 +5,7 @@ import { get } from 'svelte/store';
 let LAST_IPC_STATE = 1;
 MANAGER_DATA.subscribe((data) => {
 	// if gameplay started and scene still on Mappool, switch back to Gameplay
-	if (data.ipcState === 3 && get(CURRENT_SCENE_NAME) === 'Mappool') {
+	if (LAST_IPC_STATE === 1 && data.ipcState === 3 && get(CURRENT_SCENE_NAME) === 'Mappool') {
 		change_scenes('Gameplay');
 	}
 
