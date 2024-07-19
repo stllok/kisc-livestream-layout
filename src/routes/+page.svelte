@@ -43,7 +43,7 @@
 			return;
 		}
 		if (e.key === 't') {
-			$MANAGER_DATA.bools.scoreVisible = $MANAGER_DATA.bools.scoreVisible === 0 ? 1 : 0;
+			$MANAGER_DATA.bools.scoreVisible = $MANAGER_DATA.bools.scoreVisible  ? true : false;
 			console.log('?', $MANAGER_DATA.bools.scoreVisible);
 		}
 		if (e.key === '[') {
