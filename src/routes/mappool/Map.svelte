@@ -27,7 +27,7 @@
 	}
 
 	async function on_set_auto() {
-		if ((RESULT !== null || is_ban) && !is_autopick_enabled) {
+		if (RESULT !== null || is_ban || !is_autopick_enabled) {
 			return;
 		}
 
