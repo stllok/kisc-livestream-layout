@@ -23,23 +23,6 @@
 		{#if $MANAGER_DATA.bools.starsVisible}
 			<div class="flex gap-1 duration-100 group-last:flex-row-reverse" transition:fade>
 				{#each Array(target_point).keys() as i}
-					<!-- {#if i < current_point}
-						<enhanced:img
-							src="$lib/assets/point.png?w=50"
-							alt="POINT"
-							fetchpriority="high"
-							loading="eager"
-							in:fade={{ duration: 500 }}
-						/>
-					{:else}
-						<enhanced:img
-							src="$lib/assets/not-point.png?w=50"
-							alt="NOTPOINT"
-							fetchpriority="high"
-							loading="eager"
-							in:fade={{ duration: 500 }}
-						/>
-					{/if} -->
 					<div
 						class="h-[50px] w-[50px] bg-contain transition-all duration-1000 group-last:-scale-x-100 data-[point=false]:saturate-0"
 						data-point={i < current_point}

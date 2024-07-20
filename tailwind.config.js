@@ -23,7 +23,8 @@ export default {
 				sourcehansan: ['SourceHanSans', 'sans'],
 				misans: ['Misans', 'misans'],
 				bahnschrift: ['Bahnschrift', 'Adobe NotDef'],
-				xinyugongpinboi: ['XinYuGongPinBoTi', 'xinyugongpinboi']
+				xinyugongpinboi: ['XinYuGongPinBoTi', 'xinyugongpinboi'],
+				alegreya: ['Alegreya', 'alegreya']
 			},
 			colors: {
 				NM: {

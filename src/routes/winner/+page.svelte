@@ -14,12 +14,12 @@
 	data-is-red-win={IS_LEFT_WIN}
 >
 	<p
-		class="font-xinyugongpinboi text-9xl group-data-[is-red-win=false]/main:text-[#2b4390] group-data-[is-red-win=true]/main:text-[#902b2b]"
+		class="font-alegreya text-9xl group-data-[is-red-win=false]/main:text-[#2b4390] group-data-[is-red-win=true]/main:text-[#902b2b]"
 	>
 		Winner
 	</p>
 	<p
-		class="font-xinyugongpinboi text-9xl group-data-[is-red-win=false]/main:text-[#2b4390] group-data-[is-red-win=true]/main:text-[#902b2b]"
+		class="font-alegreya text-9xl group-data-[is-red-win=false]/main:text-[#2b4390] group-data-[is-red-win=true]/main:text-[#902b2b]"
 	>
 		{TEAMNAME}
 	</p>

@@ -24,4 +24,11 @@
 		font-display: swap;
 		src: url('/font/XinYuGongPinBoTi.ttf');
 	}
+	@font-face {
+		font-family: 'Alegreya';
+		font-style: italic;
+		font-weight: 800;
+		/* font-display: swap; */
+		src: url('/font/Alegreya-ExtraBoldItalic.ttf');
+	}
 }
