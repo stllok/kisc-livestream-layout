@@ -24,7 +24,7 @@
 			);
 			CURRENT_MAP_ID = bm.id;
 
-			MAP = MAP?.beatmap_id !== $BEATMAP_METADATA.id ? null : MAP;
+			MAP = MAP?.beatmap_id === $BEATMAP_METADATA.id ? MAP : null;
 			console.log(MAP);
 		}
 	});

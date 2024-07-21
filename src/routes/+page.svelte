@@ -8,7 +8,7 @@
 	import MapInfo from '$lib/MapInfo.svelte';
 	import { CURRENT_SCENE_NAME, change_scenes } from '$lib/state/obs_ws';
 	import PointLayout from '$lib/PointLayout.svelte';
-
+	
 	let LAST_IPC_STATE = 1;
 	MANAGER_DATA.subscribe((data) => {
 		// TODO: also write winner condition

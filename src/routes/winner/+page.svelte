@@ -1,13 +1,16 @@
 <script lang="ts">
 	import { TEAM_DATA } from '$lib';
 	import { MANAGER_DATA } from '$lib/state/gosu';
+	import { onMount } from 'svelte';
 	import TierSlot from './TierSlot.svelte';
+	import { STATIC_TEAMNAMES, type TeamConfig } from '$lib/state/team';
 
 	$: IS_LEFT_WIN = $MANAGER_DATA.stars.left > $MANAGER_DATA.stars.right;
-	// $: IS_LEFT_WIN = true;
-	$: TEAMNAME = IS_LEFT_WIN ? $MANAGER_DATA.teamName.left : $MANAGER_DATA.teamName.right;
-	$: PLAYERS = TEAM_DATA[TEAMNAME] ?? [];
 </script>
+
+{#await STATIC_TEAMNAMES then TEAMNAMES}
+{@const TEAMNAME = IS_LEFT_WIN ? TEAMNAMES.left : TEAMNAMES.right}
+{@const PLAYERS = TEAM_DATA[TEAMNAME] ?? []}
 
 <div
 	class="group/main flex h-screen w-screen flex-col items-center justify-center gap-8"
@@ -41,3 +44,4 @@
 		{/each}
 	</div>
 </div>
+{/await}
