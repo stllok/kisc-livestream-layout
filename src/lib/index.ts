@@ -54,7 +54,7 @@ export const TEAM_DATA: { [key: string]: PlayerMetadata[] } = {
 		{ id: 10442993, name: 'Hinatsuru Ai' },
 		{ id: 16375942, name: 'saberrrrrr' },
 		{ id: 8165685, name: 'shadevr' },
-		{ id: 10436444, name: 'No rank' }
+		{ id: 10436444, name: 'Sana Chitose' }
 	],
 	'its ikuyover': [
 		{ id: 5407620, name: 'Tebi' },

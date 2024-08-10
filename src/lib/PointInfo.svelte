@@ -7,11 +7,11 @@
 	export let current_point: number;
 </script>
 
-<div class="group flex gap-2 px-2 py-2 last:flex-row-reverse">
+<div class="group flex gap-2 px-2 py-2 last:flex-row-reverse ">
 	<img
 		src="/kisc_static/team/{teamname}"
 		alt="ICON"
-		class="h-28 w-28 rounded-xl"
+		class="h-28 w-28 rounded-xl object-cover"
 		on:error={(o) => {
 			o.target.src = '/kisc_static/team/default.png';
 		}}

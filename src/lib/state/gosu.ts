@@ -125,7 +125,7 @@ const MANAGER_DATA: Writable<TourneyManager> = writable({
 	ipcState: 3,
 	bestOF: 17,
 	teamName: {
-		left: 'みらくるオムライス~',
+		left: '感動～',
 		right: 'Team 16'
 	},
 	stars: {

@@ -3,7 +3,6 @@
 	import { MANAGER_DATA } from '$lib/state/gosu';
 	import Chat from './Chat.svelte';
 	import { TEAM_DATA } from '$lib';
-	import { STATIC_TEAMNAMES } from './state/team';
 
 	let LIST_DOM: HTMLElement;
 
@@ -30,11 +29,10 @@
 </script>
 
 
-{#await STATIC_TEAMNAMES then TEAMNAMES}
 <div class="flex h-full w-full flex-col rounded-3xl bg-[#6c5d56] p-3">
 	<div class="flex h-full w-full flex-col overflow-hidden" bind:this={LIST_DOM} use:autoAnimate>
 		{#each $MANAGER_DATA.chat ?? [] as chat}
-			<Chat time={chat.time} name={chat.name} team={get_team_color(chat.name, TEAMNAMES.left, TEAMNAMES.right)}>
+			<Chat time={chat.time} name={chat.name} team={get_team_color(chat.name, $MANAGER_DATA.teamName.left, $MANAGER_DATA.teamName.right)}>
 				{chat.messageBody}
 			</Chat>
 		{:else}
@@ -54,4 +52,3 @@
 		{/each}
 	</div>
 </div>
-{/await}

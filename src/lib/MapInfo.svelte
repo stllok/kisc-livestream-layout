@@ -16,6 +16,7 @@
 
 	BEATMAP_METADATA.subscribe((bm) => {
 		if (bm.id !== CURRENT_MAP_ID) {
+			red_pick = red_pick !== null ? !red_pick : red_pick;
 			Object.entries(mappool).forEach(([_, maps]) =>
 				maps.forEach((map: MapPoolMetadata) => {
 					if ($BEATMAP_METADATA.id === map.beatmap_id) {
@@ -55,7 +56,7 @@
 		on:contextmenu|preventDefault={() => (red_pick = null)}
 	>
 		<img
-			class="w-64 rounded-3xl border-4 object-cover duration-1000 data-[team=blue]:border-TEAMBLUE_BORDER data-[team=none]:border-[#7e22ce] data-[team=red]:border-TEAMRED_BORDER"
+			class="w-64 h-36 rounded-3xl border-4 object-cover duration-1000 data-[team=blue]:border-TEAMBLUE_BORDER data-[team=none]:border-[#7e22ce] data-[team=red]:border-TEAMRED_BORDER"
 			data-team={red_pick === null ? 'none' : red_pick ? 'red' : 'blue'}
 			src={`http://${GOSUMEMORY_ADDRESS}/Songs/${$BEATMAP_METADATA.path.full}`}
 			alt="BG"
