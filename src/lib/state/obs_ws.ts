@@ -11,18 +11,14 @@ export const change_scenes = async (sceneName: string) => {
 };
 
 export const broadcase_team_picking = async (is_team_red: boolean) => {
-	await OBS_WS.call('BroadcastCustomEvent', {
-		eventData: {
-			is_team_red
-		}
-	});
+	// deprecated
 };
 
 const IS_TEAM_RED_PICKING = writable(false);
 const IS_BAN_ENDED = writable(false);
 OBS_WS.addListener('CustomEvent', (event) => {
+	// deprecated
 	console.log(event);
-	IS_TEAM_RED_PICKING.set(event.eventData.is_team_red);
 });
 
 OBS_WS.addListener('CurrentProgramSceneChanged', (event) => {
