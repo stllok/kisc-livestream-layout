@@ -10,34 +10,28 @@
 		duration: 200,
 		easing: cubicOut
 	});
+	const MAX_SCORE = 1000000;
 
 	$: DIFF_SMOOTH.set(DIFFS);
+	$: BAR_PERCENT = Math.min(1, Math.pow(DIFFS / MAX_SCORE, 0.5) / 2) * 100
+
 </script>
 
 <!-- Color Bar -->
 <div class="flex h-4 w-screen *:duration-500">
 	<div
 		class="h-full bg-TEAMRED"
-		style:width="{is_tie
-			? 50
-			: ($WEIGHTED_TEAMRED_SCORE / ($WEIGHTED_TEAMRED_SCORE + $WEIGHTED_TEAMBLUE_SCORE)) * 100}%"
+		style:width="{50 + (is_red_win ? BAR_PERCENT : -BAR_PERCENT)}%"
 	/>
 	<div
 		class="h-full bg-TEAMBLUE"
-		style:width="{is_tie
-			? 50
-			: ($WEIGHTED_TEAMBLUE_SCORE / ($WEIGHTED_TEAMRED_SCORE + $WEIGHTED_TEAMBLUE_SCORE)) * 100}%"
+		style:width="{50 + (!is_red_win ? BAR_PERCENT : -BAR_PERCENT)}%"
 	/>
 </div>
 
 <!-- Diff Number -->
 <div class="flex *:duration-500">
-	<div
-		class="h-full"
-		style:width="{is_tie
-			? 50
-			: ($WEIGHTED_TEAMRED_SCORE / ($WEIGHTED_TEAMRED_SCORE + $WEIGHTED_TEAMBLUE_SCORE)) * 100}%"
-	/>
+	<div class="h-full" style:width="{50 + (is_red_win ? BAR_PERCENT : -BAR_PERCENT)}%" />
 	<p
 		class="font-bahnschrift text-5xl font-bold"
 		class:text-TEAMRED={is_red_win && !is_tie}
@@ -49,10 +43,5 @@
 			.toString()
 			.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
 	</p>
-	<div
-		class="h-full"
-		style:width="{is_tie
-			? 50
-			: ($WEIGHTED_TEAMBLUE_SCORE / ($WEIGHTED_TEAMRED_SCORE + $WEIGHTED_TEAMBLUE_SCORE)) * 100}%"
-	/>
+	<div class="h-full" style:width="{50 + (!is_red_win ? BAR_PERCENT : -BAR_PERCENT)}%" />
 </div>
